@@ -123,7 +123,7 @@ theorem algebraicIndependent_optionElim_mul_X_add [IsDomain k] {x : ι → MvPol
     ← Polynomial.eval₂_map, ← Polynomial.comp, Polynomial.comp_eq_zero_iff] at h1
   rcases h1 with h1 | ⟨-, h1⟩
   · exact Polynomial.map_injective _ Subtype.val_injective (by simpa using h1)
-  · have h2 := congrArg (Polynomial.coeff · 1) h1
+  · have h2 := congrArg (fun p => p.coeff 1) h1
     simp only [Polynomial.coeff_add, Polynomial.coeff_mul_X, Polynomial.coeff_C_zero,
       Polynomial.coeff_C_succ, add_zero, Polynomial.mul_coeff_zero, Polynomial.coeff_X_zero,
       mul_zero, zero_add] at h2

@@ -682,8 +682,8 @@ theorem isUnit_pluckerCoord_unitColMatrix (ρ : Fin b → Fin a) {C : Finset (Fi
   set e := C.orderEmbOfFin hC
   apply isUnit_det_of_left_inverse (B := ((unitColMatrix K ρ).submatrix id e)ᵀ)
   ext i j
-  simp only [mul_apply, transpose_apply, submatrix_apply, id, unitColMatrix_apply,
-    mul_ite, mul_one, mul_zero, one_apply]
+  simp only [Matrix.mul_apply, transpose_apply, submatrix_apply, id, unitColMatrix_apply,
+    mul_ite, mul_one, mul_zero, Matrix.one_apply]
   rw [sum_ite_eq, ite_eq_left (mem_univ _)]
   by_cases h : i = j
   · simp [h]

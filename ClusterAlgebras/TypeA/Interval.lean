@@ -501,12 +501,12 @@ theorem exists_equiv_intervalTriangulation (hab : a + 2 ≤ b) :
 `intervalTriangulations a b`. -/
 instance instFintypeSubtypeIsIntervalTriangulation (a b : ℤ) :
     Fintype {S // IsIntervalTriangulation a b S} :=
-  Fintype.ofFinset (intervalTriangulations a b) fun _ => mem_intervalTriangulations
+  Fintype.subtype (intervalTriangulations a b) fun _ => mem_intervalTriangulations
 
 /-- `τ(a, b)` is the cardinality of the type of triangulations of `[a, b]`. -/
 theorem card_subtype_isIntervalTriangulation (a b : ℤ) :
     Fintype.card {S // IsIntervalTriangulation a b S} = intervalTriangulationCount a b :=
-  Fintype.card_ofFinset _ _
+  Fintype.subtype_card _ _
 
 /-- **The recursion for `τ`**: for `b ≥ a + 2`,
 `τ(a, b) = ∑_{k = a+1}^{b-1} τ(a, k) τ(k, b)`. -/

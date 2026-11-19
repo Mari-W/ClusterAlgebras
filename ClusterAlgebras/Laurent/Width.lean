@@ -110,7 +110,7 @@ theorem hasWidth_iff_exists_polynomial (hq : y q ≠ 0) :
     have hd : ∀ e ≤ w, (d e : F) = c e := fun e he => by simp [d, he]
     set P := ∑ e ∈ Finset.range (w + 1), monomial e (d e)
     have hP : ∀ k, P.coeff k = if k ≤ w then d k else 0 := fun k => by
-      simp [P, coeff_monomial]
+      simp [P, Finsupp.single_apply, Nat.lt_succ_iff]
     have hPw : P.coeff w ≠ 0 := by
       rw [hP, ite_eq_left le_rfl]
       exact fun h => hw (by rw [← hd w le_rfl, h, ZeroMemClass.coe_zero])
@@ -282,7 +282,7 @@ theorem isUnit_of_hasWidth_zero_of_mul_eq {A B : laurentSubringExcept y q} (hB :
   set c' : laurentSubringExcept y q := ⟨c, hc⟩
   have key := eq_of_zpow_mul_aeval_eq hy (e₀ := e + f) (e₀' := 0) (P := C c' * Q)
     (P' := C A * X + C B) ?_ (by simpa using hB.ne_zero) ?_
-  · have h0 := congrArg (coeff · 0) key.2
+  · have h0 := congrArg (fun p => p.coeff 0) key.2
     simp only [coeff_C_mul, coeff_add, coeff_C_zero] at h0
     have hcU : IsUnit c' := isUnit_of_dvd_unit ⟨_, (h0.trans (by simp)).symm⟩ hB
     have : (⟨c * y q ^ e, hg.mem_laurentSubring⟩ : laurentSubring y) =

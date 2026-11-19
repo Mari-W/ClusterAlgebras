@@ -576,7 +576,9 @@ theorem RootedTree.IsCollapsibleOfColour.exists_isPendantAt_of_collapse (hG : G.
   obtain ⟨D, hD⟩ : ∃ D : Set H, ∀ d, d ∈ D ↔ d ∈ Subtype.val '' D' ∨
       (((∃ y ∈ D', G.vertexOf (y : H) = T.root) ∧ G.vertexOf (x : H) ≠ T.root) ∧
         d ∈ T.darts) :=
-    ⟨_, fun _ => Iff.rfl⟩
+    ⟨{d | d ∈ Subtype.val '' D' ∨
+      (((∃ y ∈ D', G.vertexOf (y : H) = T.root) ∧ G.vertexOf (x : H) ≠ T.root) ∧
+        d ∈ T.darts)}, fun _ => Iff.rfl⟩
   have hnb : ∀ z ∈ D', (z : H) ∉ G.bdry := fun z hz h =>
     hD'.notMem_bdry z hz (mem_collapse_bdry.2 h)
   have hint := fun d (hd : d ∈ D) hne =>
@@ -754,7 +756,8 @@ theorem RootedTree.exists_isPendantAt_of_collapse_of_eq_bvertex (hG : G.IsPlabic
     exact hW1 g' hgK hv
   obtain ⟨D, hD⟩ : ∃ D : Set H, ∀ d, d ∈ D ↔ d ∈ Subtype.val '' D' ∨
       (G.leg y₀ ∈ Subtype.val '' D' ∧ d ∈ T.darts) :=
-    ⟨_, fun _ => Iff.rfl⟩
+    ⟨{d | d ∈ Subtype.val '' D' ∨
+      (G.leg y₀ ∈ Subtype.val '' D' ∧ d ∈ T.darts)}, fun _ => Iff.rfl⟩
   have hint := fun d (hd : d ∈ D) hne =>
     vertexOf_mem_internalVertices_and_mem_of_mem_lift_of_eq_bvertex hG hT0 hD' hW1 hW2 hD hd hne
   refine ⟨w, hwv, D, ⟨?_, ?_, fun d hd hne => (hint d hd hne).1,

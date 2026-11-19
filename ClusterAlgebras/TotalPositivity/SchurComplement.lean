@@ -265,7 +265,7 @@ theorem minor_union_eq_schurComplement {K : Type*} [Field K] (x : Matrix ι κ K
     ext s t
     rw [submatrix_apply, schurComplement]
     erw [dite_eq_left hRC]
-    simp only [Matrix.sub_apply, submatrix_apply, mul_apply, sum_mul, V,
+    simp only [Matrix.sub_apply, submatrix_apply, Matrix.mul_apply, sum_mul, V,
       eC, eR]
   rw [hS]
   push_cast

@@ -282,7 +282,7 @@ private theorem dynkinWeightedGraph_D_eq (N : ℕ) (hN : 4 ≤ N)
   simp only [cartanD]
   rw [natAbs_cartanOfGraph_mul hij']
   simp only [orderedModel, dPosEquiv, Equiv.ofBijective_apply]
-  rw [dPos_spec hN hi hj]
+  erw [dPos_spec hN hi hj]
   simp only [dynkinTreeD, SimpleGraph.fromRel_adj, dynkinTreeDRel, Fin.val_cast, ne_eq]
   exact if_congr (and_iff_right hij') rfl rfl
 
@@ -300,7 +300,7 @@ private theorem dynkinWeightedGraph_E_eq (N : ℕ) (hN : 6 ≤ N ∧ N ≤ 8)
   simp only [cartanE]
   rw [natAbs_cartanOfGraph_mul hij']
   simp only [orderedModel, ePosEquiv, Equiv.ofBijective_apply]
-  rw [ePos_spec hN.1 hi hj]
+  erw [ePos_spec hN.1 hi hj]
   simp only [dynkinGraphE, SimpleGraph.fromRel_adj, dynkinERel, Fin.val_cast, ne_eq]
   exact if_congr (and_iff_right hij') rfl rfl
 

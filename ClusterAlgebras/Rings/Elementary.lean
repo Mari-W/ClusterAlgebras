@@ -89,16 +89,16 @@ private theorem diagonal_mem_closure_transvection {i j : n} (hij : i ≠ j) {c :
     · subst ha
       simp only [transvection_mul_apply_same, transvection_mul_apply_of_ne, ne_eq, hij,
         Ne.symm hij, not_false_eq_true]
-      simp only [transvection, one_apply, single_apply, diagonal_apply, Matrix.add_apply]
+      simp only [transvection, Matrix.one_apply, single_apply, diagonal_apply, Matrix.add_apply]
       split_ifs <;> simp_all
     · by_cases haj : a = j
       · subst haj
         simp only [transvection_mul_apply_same, transvection_mul_apply_of_ne, ne_eq, hij,
           Ne.symm hij, not_false_eq_true]
-        simp only [transvection, one_apply, single_apply, diagonal_apply, Matrix.add_apply]
+        simp only [transvection, Matrix.one_apply, single_apply, diagonal_apply, Matrix.add_apply]
         split_ifs <;> simp_all
       · simp only [transvection_mul_apply_of_ne, ne_eq, ha, haj, not_false_eq_true]
-        simp only [transvection, one_apply, single_apply, diagonal_apply, Matrix.add_apply]
+        simp only [transvection, Matrix.one_apply, single_apply, diagonal_apply, Matrix.add_apply]
         split_ifs <;> simp_all
   rw [key]
   refine mul_mem (mul_mem (mul_mem (mul_mem (mul_mem ?_ ?_) ?_) ?_) ?_) ?_ <;>
@@ -178,14 +178,14 @@ theorem mul_mem_lowerUnitriangular {u v : Matrix (Fin p) (Fin p) ℂ}
     (hu : u ∈ lowerUnitriangular p) (hv : v ∈ lowerUnitriangular p) :
     u * v ∈ lowerUnitriangular p := by
   refine ⟨fun i => ?_, fun i j hij => ?_⟩
-  · rw [mul_apply, Finset.sum_eq_single i]
+  · rw [Matrix.mul_apply, Finset.sum_eq_single i]
     · rw [hu.1 i, hv.1 i, one_mul]
     · intro k _ hki
       rcases lt_or_gt_of_ne hki with h | h
       · rw [hv.2 k i h, mul_zero]
       · rw [hu.2 i k h, zero_mul]
     · simp
-  · rw [mul_apply]
+  · rw [Matrix.mul_apply]
     refine Finset.sum_eq_zero fun k _ => ?_
     rcases lt_or_ge i k with h | h
     · rw [hu.2 i k h, zero_mul]

@@ -78,7 +78,7 @@ theorem flagMinor_mul_of_lowerUnitriangular {p : ℕ} {u : Matrix (Fin p) (Fin p
     set e := J.orderEmbOfFin rfl
     have hsub : (u * z).submatrix c e = u.submatrix c c * z.submatrix c e := by
       ext s t
-      simp only [submatrix_apply, mul_apply]
+      simp only [submatrix_apply, Matrix.mul_apply]
       symm
       refine Fintype.sum_of_injective c (Fin.castLE_injective hr) _ _ ?_ fun _ => rfl
       intro l hl

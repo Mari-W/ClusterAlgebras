@@ -136,11 +136,11 @@ theorem mixedLaurentSubring_eq_closure (y : Fin m → F) (n : ℕ) :
     by_cases hi : (i : ℕ) < n
     · obtain ⟨k, hk | hk⟩ := (a i).eq_nat_or_neg
       · rw [hk, zpow_natCast]
-        exact pow_mem (Subring.subset_closure (.inl ⟨i, rfl⟩)) k
+        exact pow_mem (Subring.subset_closure (Or.inl ⟨i, rfl⟩)) k
       · rw [hk, zpow_neg, zpow_natCast, ← inv_pow]
-        exact pow_mem (Subring.subset_closure (.inr ⟨i, hi, rfl⟩)) k
+        exact pow_mem (Subring.subset_closure (Or.inr ⟨i, hi, rfl⟩)) k
     · rw [← Int.toNat_of_nonneg (ha i (not_lt.1 hi)), zpow_natCast]
-      exact pow_mem (Subring.subset_closure (.inl ⟨i, rfl⟩)) _
+      exact pow_mem (Subring.subset_closure (Or.inl ⟨i, rfl⟩)) _
 
 end Mixed
 

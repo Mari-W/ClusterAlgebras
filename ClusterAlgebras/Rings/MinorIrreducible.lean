@@ -196,7 +196,7 @@ theorem not_minor_mvPolynomialX_dvd_of_not_subset [Nontrivial K] {I I' : Finset 
     rw [minor_of_card_eq x rfl h.symm]
     convert det_one (n := Fin I.card) (R := K) using 2
     ext s t
-    simp only [submatrix_apply, one_apply]
+    simp only [submatrix_apply, Matrix.one_apply]
     simp only [x]
     rcases eq_or_ne s t with rfl | hst
     · simp [eI, eJ]

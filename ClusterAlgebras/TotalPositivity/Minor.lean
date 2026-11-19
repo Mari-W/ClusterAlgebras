@@ -131,7 +131,7 @@ theorem minor_genericMatrix_ne_zero {I : Finset ι} {J : Finset κ} (h : I.card 
   have hsub : x.submatrix eI eJ = 1 := by
     ext s t
     rw [submatrix_apply]
-    simp [x, one_apply]
+    simp [x, Matrix.one_apply]
   rw [hsub, det_one] at h1
   exact one_ne_zero h1
 
