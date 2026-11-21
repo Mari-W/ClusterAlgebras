@@ -45,7 +45,7 @@ def a3Path : Quiver (Fin 3) where
   arrows u v := if u = 0 ∧ v = 1 ∨ u = 1 ∧ v = 2 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-- The orientation of the type `A₃` diagram with its middle vertex a source. -/
 @[cluster_algebras "def_a3_quivers"]
@@ -54,7 +54,7 @@ def a3Source : Quiver (Fin 3) where
   arrows u v := if u = 1 ∧ v = 0 ∨ u = 1 ∧ v = 2 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-- The orientation of the type `A₃` diagram with its middle vertex a sink. -/
 @[cluster_algebras "def_a3_quivers"]
@@ -63,7 +63,7 @@ def a3Sink : Quiver (Fin 3) where
   arrows u v := if u = 0 ∧ v = 1 ∨ u = 2 ∧ v = 1 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-- The oriented `3`-cycle `1 → 0 → 2 → 1`, also counted as a quiver of type `A₃`. -/
 @[cluster_algebras "def_a3_quivers"]
@@ -72,7 +72,7 @@ def a3Cycle : Quiver (Fin 3) where
   arrows u v := if u = 1 ∧ v = 0 ∨ u = 0 ∧ v = 2 ∨ u = 2 ∧ v = 1 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 namespace Quiver
 
@@ -116,33 +116,33 @@ private def mutateIso {A T : Quiver (Fin 3)} {k : Fin 3} (hk : k ∉ A.frozen)
 orientation, according to the vertex. -/
 theorem isA3_mutate_a3Path {k : Fin 3} (hk : k ∉ a3Path.frozen) : IsA3 (a3Path.mutate hk) := by
   fin_cases k
-  · exact Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩)
-  · exact Or.inr (Or.inr (Or.inr ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩))
-  · exact Or.inr (Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩))
+  · exact Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩)
+  · exact Or.inr (Or.inr (Or.inr ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩))
+  · exact Or.inr (Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩))
 
 /-- Mutating the source orientation gives the path or the sink orientation. -/
 theorem isA3_mutate_a3Source {k : Fin 3} (hk : k ∉ a3Source.frozen) :
     IsA3 (a3Source.mutate hk) := by
   fin_cases k
-  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩
-  · exact Or.inr (Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩))
-  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.swap 0 2) (by decide)⟩
+  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩
+  · exact Or.inr (Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩))
+  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.swap 0 2) (by decide +kernel)⟩
 
 /-- Mutating the sink orientation gives the path or the source orientation. -/
 theorem isA3_mutate_a3Sink {k : Fin 3} (hk : k ∉ a3Sink.frozen) : IsA3 (a3Sink.mutate hk) := by
   fin_cases k
-  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.swap 0 2) (by decide)⟩
-  · exact Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩)
-  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩
+  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.swap 0 2) (by decide +kernel)⟩
+  · exact Or.inr (Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩)
+  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩
 
 /-- Mutating the oriented `3`-cycle gives the path in every direction, twice after a
 relabelling by a three-cycle of the vertices. -/
 theorem isA3_mutate_a3Cycle {k : Fin 3} (hk : k ∉ a3Cycle.frozen) :
     IsA3 (a3Cycle.mutate hk) := by
   fin_cases k
-  · exact Or.inl ⟨mutateIso hk rfl rfl (finRotate 3) (by decide)⟩
-  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide)⟩
-  · exact Or.inl ⟨mutateIso hk rfl rfl (finRotate 3).symm (by decide)⟩
+  · exact Or.inl ⟨mutateIso hk rfl rfl (finRotate 3) (by decide +kernel)⟩
+  · exact Or.inl ⟨mutateIso hk rfl rfl (Equiv.refl _) (by decide +kernel)⟩
+  · exact Or.inl ⟨mutateIso hk rfl rfl (finRotate 3).symm (by decide +kernel)⟩
 
 variable [DecidableEq V]
 

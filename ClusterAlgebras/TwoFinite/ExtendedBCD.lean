@@ -347,10 +347,10 @@ private theorem not_isTwoFinite_cAffine_core (k : ℕ)
     have hF := diagramWeight_eq_symModel hC.1 hw
     obtain ⟨C', hC', h1, -, -⟩ := hC.exists_fork
         (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) 1 2 [0]
-      (by simp only [hF]; decide) (by rw [hF]; decide) (by decide)
+      (by simp only [hF]; decide +kernel) (by rw [hF]; decide +kernel) (by decide +kernel)
     have := hC'.diagramWeight_le_three 0 2
     rw [h1 0 (by simp), hF, hF] at this
-    exact absurd this (by decide)
+    exact absurd this (by decide +kernel)
   | succ k ih =>
     intro C hw hC
     have hF := diagramWeight_eq_symModel hC.1 hw
@@ -390,11 +390,11 @@ private theorem not_isTwoFinite_bAffine_core (k : ℕ)
     have hF := diagramWeight_eq_symModel hC.1 hw
     obtain ⟨C', hC', h1, h2, -⟩ := hC.exists_fork
         (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) 2 3 [0, 1]
-      (by simp only [hF]; decide) (by rw [hF]; decide) (by decide)
-    have e03 : diagramWeight C' 0 3 = 2 := by rw [h1 0 (by simp), hF, hF]; decide
-    have e13 : diagramWeight C' 1 3 = 2 := by rw [h1 1 (by simp), hF, hF]; decide
+      (by simp only [hF]; decide +kernel) (by rw [hF]; decide +kernel) (by decide +kernel)
+    have e03 : diagramWeight C' 0 3 = 2 := by rw [h1 0 (by simp), hF, hF]; decide +kernel
+    have e13 : diagramWeight C' 1 3 = 2 := by rw [h1 1 (by simp), hF, hF]; decide +kernel
     have e01 : diagramWeight C' 0 1 = 0 := h2 0 (by simp) 1 (by simp)
-    let r : Fin 3 ↪ Fin 4 := ⟨![0, 3, 1], by decide⟩
+    let r : Fin 3 ↪ Fin 4 := ⟨![0, 3, 1], by decide +kernel⟩
     refine not_isTwoFinite_cAffine_core (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) 0
         (C'.submatrix r r) (fun p q hpq => ?_)
       (hC'.submatrix r)
@@ -432,23 +432,23 @@ private theorem not_isTwoFinite_matrixMutation_dAffine_four {C₁ : Matrix (Fin 
   intro hC₂
   have z : ∀ i j : Fin 5, symModel (dAffineModel 4) i j = 0 → C₁ i j = 0 := fun i j h =>
     (eq_zero_of_diagramWeight_eq_zero' hS (by rw [hW]; exact h)).1
-  obtain ⟨a03, w03⟩ := matrixMutation_of_through' hS (by decide) (by decide)
-    (z 0 3 (by decide)) ⟨p02, p23⟩
-  obtain ⟨a04, w04⟩ := matrixMutation_of_through' hS (by decide) (by decide)
-    (z 0 4 (by decide)) ⟨p02, p24⟩
-  obtain ⟨a13, w13⟩ := matrixMutation_of_through' hS (by decide) (by decide)
-    (z 1 3 (by decide)) ⟨p12, p23⟩
-  obtain ⟨a14, w14⟩ := matrixMutation_of_through' hS (by decide) (by decide)
-    (z 1 4 (by decide)) ⟨p12, p24⟩
+  obtain ⟨a03, w03⟩ := matrixMutation_of_through' hS (by decide +kernel) (by decide +kernel)
+    (z 0 3 (by decide +kernel)) ⟨p02, p23⟩
+  obtain ⟨a04, w04⟩ := matrixMutation_of_through' hS (by decide +kernel) (by decide +kernel)
+    (z 0 4 (by decide +kernel)) ⟨p02, p24⟩
+  obtain ⟨a13, w13⟩ := matrixMutation_of_through' hS (by decide +kernel) (by decide +kernel)
+    (z 1 3 (by decide +kernel)) ⟨p12, p23⟩
+  obtain ⟨a14, w14⟩ := matrixMutation_of_through' hS (by decide +kernel) (by decide +kernel)
+    (z 1 4 (by decide +kernel)) ⟨p12, p24⟩
   have w01 := diagramWeight_matrixMutation_of_iff_same hS (c := 2) (i := 0) (j := 1)
-    (by decide) (by decide) (by rw [hW]; decide) (by rw [hW]; decide) (iff_of_true p02 p12)
+    (by decide +kernel) (by decide +kernel) (by rw [hW]; decide +kernel) (by rw [hW]; decide +kernel) (iff_of_true p02 p12)
   have w34 := diagramWeight_matrixMutation_of_iff_same hS (c := 2) (i := 3) (j := 4)
-    (by decide) (by decide) (by rw [hW]; decide) (by rw [hW]; decide) (iff_of_false n32 n42)
+    (by decide +kernel) (by decide +kernel) (by rw [hW]; decide +kernel) (by rw [hW]; decide +kernel) (iff_of_false n32 n42)
   rw [hW, hW] at w03 w04 w13 w14
   rw [hW] at w01 w34
   set C₂ := matrixMutation le_rfl C₁ 2
   have hcyc : IsChordlessCycle C₂ (![0, 3, 1, 4] : Fin 4 → Fin 5) := by
-    refine ⟨by omega, by decide, fun p q hpq => ?_⟩
+    refine ⟨by omega, by decide +kernel, fun p q hpq => ?_⟩
     rw [diagramGraph_adj]
     fin_cases p <;> fin_cases q
     all_goals first
@@ -482,14 +482,14 @@ private theorem not_isTwoFinite_dAffine_four
   have hF := diagramWeight_eq_symModel hC.1 hw
   obtain ⟨C₁, hC₁, hw₁, -, ho₁⟩ := hC.exists_orient'
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) 2 (fun ℓ => ℓ = 0 ∨ ℓ = 1) [0, 1, 3, 4]
-    (by simp only [hF]; decide)
+    (by simp only [hF]; decide +kernel)
   have hW : ∀ i j, diagramWeight C₁ i j = symModel (dAffineModel 4) i j := fun i j =>
     (hw₁ i j).trans (hF i j)
   have hS := hC₁.1
-  have n32 : ¬0 < C₁ 3 2 := fun h => absurd ((ho₁ 3 (by simp)).1 h) (by decide)
-  have n42 : ¬0 < C₁ 4 2 := fun h => absurd ((ho₁ 4 (by simp)).1 h) (by decide)
-  have p23 : 0 < C₁ 2 3 := pos_symm_of_not_pos hS (by rw [hW]; decide) n32
-  have p24 : 0 < C₁ 2 4 := pos_symm_of_not_pos hS (by rw [hW]; decide) n42
+  have n32 : ¬0 < C₁ 3 2 := fun h => absurd ((ho₁ 3 (by simp)).1 h) (by decide +kernel)
+  have n42 : ¬0 < C₁ 4 2 := fun h => absurd ((ho₁ 4 (by simp)).1 h) (by decide +kernel)
+  have p23 : 0 < C₁ 2 3 := pos_symm_of_not_pos hS (by rw [hW]; decide +kernel) n32
+  have p24 : 0 < C₁ 2 4 := pos_symm_of_not_pos hS (by rw [hW]; decide +kernel) n42
   exact not_isTwoFinite_matrixMutation_dAffine_four
     (hIsCyclicallyOrientedOfIsTwoFinite := hIsCyclicallyOrientedOfIsTwoFinite) hS hW
     ((ho₁ 0 (by simp)).2 (Or.inl rfl)) ((ho₁ 1 (by simp)).2 (Or.inr rfl)) p23 p24 n32 n42

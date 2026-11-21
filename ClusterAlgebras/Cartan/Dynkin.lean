@@ -219,7 +219,7 @@ theorem det_cartanC {n : ℕ} (hn : 1 ≤ n) : (cartanC n).det = 2 := by
 theorem det_cartanD_add_two_and_succ (n : ℕ) :
     (cartanD (n + 2)).det = 4 ∧ (cartanD (n + 3)).det = 4 := by
   induction n with
-  | zero => exact ⟨by rw [det_fin_two]; decide, by rw [det_fin_three]; decide⟩
+  | zero => exact ⟨by rw [det_fin_two]; decide +kernel, by rw [det_fin_three]; decide +kernel⟩
   | succ n ih =>
     refine ⟨ih.2, ?_⟩
     rw [det_eq_of_leaf_zero _ (fun j => ?_) (fun i => ?_), cartanD_submatrix_succ,
@@ -245,49 +245,49 @@ theorem det_cartanE {n : ℕ} (hn : 6 ≤ n ∧ n ≤ 8) : (cartanE n).det = 9 -
   · have h₁ : (cartanE 6).submatrix Fin.succ Fin.succ = (cartanD 5).submatrix
         (Equiv.swap (0 : Fin 5) 3 * Equiv.swap 1 2 : Equiv.Perm (Fin 5))
         (Equiv.swap (0 : Fin 5) 3 * Equiv.swap 1 2 : Equiv.Perm (Fin 5)) := by
-      decide
+      decide +kernel
     have h₂ : (cartanE 6).submatrix (Fin.succ ∘ Fin.succ) (Fin.succ ∘ Fin.succ) =
         (cartanA 4).submatrix (Equiv.swap (0 : Fin 4) 2 : Equiv.Perm (Fin 4))
           (Equiv.swap (0 : Fin 4) 2 : Equiv.Perm (Fin 4)) := by
-      decide
-    rw [det_eq_of_leaf_zero _ (by decide) (by decide), submatrix_submatrix, h₂, h₁,
+      decide +kernel
+    rw [det_eq_of_leaf_zero _ (by decide +kernel) (by decide +kernel), submatrix_submatrix, h₂, h₁,
       det_submatrix_equiv_self, det_submatrix_equiv_self, det_cartanD (by norm_num), det_cartanA]
-    decide
+    decide +kernel
   · have h₁ : (cartanE 7).submatrix Fin.succ Fin.succ = (cartanD 6).submatrix
         (Equiv.swap (0 : Fin 6) 4 * Equiv.swap 1 3 : Equiv.Perm (Fin 6))
         (Equiv.swap (0 : Fin 6) 4 * Equiv.swap 1 3 : Equiv.Perm (Fin 6)) := by
-      decide
+      decide +kernel
     have h₂ : (cartanE 7).submatrix (Fin.succ ∘ Fin.succ) (Fin.succ ∘ Fin.succ) =
         (cartanA 5).submatrix (Equiv.swap (0 : Fin 5) 3 * Equiv.swap 1 2 : Equiv.Perm (Fin 5))
           (Equiv.swap (0 : Fin 5) 3 * Equiv.swap 1 2 : Equiv.Perm (Fin 5)) := by
-      decide
-    rw [det_eq_of_leaf_zero _ (by decide) (by decide), submatrix_submatrix, h₂, h₁,
+      decide +kernel
+    rw [det_eq_of_leaf_zero _ (by decide +kernel) (by decide +kernel), submatrix_submatrix, h₂, h₁,
       det_submatrix_equiv_self, det_submatrix_equiv_self, det_cartanD (by norm_num), det_cartanA]
-    decide
+    decide +kernel
   · have h₁ : (cartanE 8).submatrix Fin.succ Fin.succ = (cartanD 7).submatrix
         (Equiv.swap (0 : Fin 7) 5 * Equiv.swap 1 4 * Equiv.swap 2 3 : Equiv.Perm (Fin 7))
         (Equiv.swap (0 : Fin 7) 5 * Equiv.swap 1 4 * Equiv.swap 2 3 : Equiv.Perm (Fin 7)) := by
-      decide
+      decide +kernel
     have h₂ : (cartanE 8).submatrix (Fin.succ ∘ Fin.succ) (Fin.succ ∘ Fin.succ) =
         (cartanA 6).submatrix (Equiv.swap (0 : Fin 6) 4 * Equiv.swap 1 3 : Equiv.Perm (Fin 6))
           (Equiv.swap (0 : Fin 6) 4 * Equiv.swap 1 3 : Equiv.Perm (Fin 6)) := by
-      decide
-    rw [det_eq_of_leaf_zero _ (by decide) (by decide), submatrix_submatrix, h₂, h₁,
+      decide +kernel
+    rw [det_eq_of_leaf_zero _ (by decide +kernel) (by decide +kernel), submatrix_submatrix, h₂, h₁,
       det_submatrix_equiv_self, det_submatrix_equiv_self, det_cartanD (by norm_num), det_cartanA]
-    decide
+    decide +kernel
 
 /-- **Determinants of the Dynkin Cartan matrices**: `det C(F_4) = 1`. -/
 @[cluster_algebras "lem_dynkin_det"]
 theorem det_cartanF₄ : cartanF₄.det = 1 := by
   rw [det_succ_row_zero]
   simp only [Fin.sum_univ_succ, det_fin_three, Finset.univ_unique, Finset.sum_singleton]
-  decide
+  decide +kernel
 
 /-- **Determinants of the Dynkin Cartan matrices**: `det C(G_2) = 1`. -/
 @[cluster_algebras "lem_dynkin_det"]
 theorem det_cartanG₂ : cartanG₂.det = 1 := by
   rw [det_fin_two]
-  decide
+  decide +kernel
 
 /-! ### Finite type -/
 
@@ -515,23 +515,23 @@ theorem isCartanFiniteType_cartanE {n : ℕ} (hn : 6 ≤ n ∧ n ≤ 8) :
 
 /-- The Cartan matrix `cartanF₄` is of finite type. -/
 theorem isCartanFiniteType_cartanF₄ : IsCartanFiniteType cartanF₄ := by
-  refine isCartanFiniteType_of_leadingMinors_pos (d := ![2, 2, 1, 1]) (by decide)
+  refine isCartanFiniteType_of_leadingMinors_pos (d := ![2, 2, 1, 1]) (by decide +kernel)
     (fun i => by fin_cases i <;> decide)
-    (by unfold IsSymmetrizer; decide) fun k hk hk1 => ?_
+    (by unfold IsSymmetrizer; decide +kernel) fun k hk hk1 => ?_
   interval_cases k
-  · rw [det_fin_one]; revert hk; decide
-  · rw [det_fin_two]; revert hk; decide
-  · rw [det_fin_three]; revert hk; decide
+  · rw [det_fin_one]; revert hk; decide +kernel
+  · rw [det_fin_two]; revert hk; decide +kernel
+  · rw [det_fin_three]; revert hk; decide +kernel
   · simp only [Fin.castLE_rfl, submatrix_id_id, det_cartanF₄]
     norm_num
 
 /-- The Cartan matrix `cartanG₂` is of finite type. -/
 theorem isCartanFiniteType_cartanG₂ : IsCartanFiniteType cartanG₂ := by
-  refine isCartanFiniteType_of_leadingMinors_pos (d := ![1, 3]) (by decide)
+  refine isCartanFiniteType_of_leadingMinors_pos (d := ![1, 3]) (by decide +kernel)
     (fun i => by fin_cases i <;> decide)
-    (by unfold IsSymmetrizer; decide) fun k hk hk1 => ?_
+    (by unfold IsSymmetrizer; decide +kernel) fun k hk hk1 => ?_
   interval_cases k
-  · rw [det_fin_one]; revert hk; decide
+  · rw [det_fin_one]; revert hk; decide +kernel
   · simp only [Fin.castLE_rfl, submatrix_id_id, det_cartanG₂]
     norm_num
 

@@ -115,7 +115,7 @@ def matrixE8GridLeftInv : Matrix (Fin 8) (Fin 8) ℤ :=
 /-- **The `E₈` computation**, (a): `V B_{E₈}` is the identity matrix. -/
 @[cluster_algebras "prop_exc_E8_computation"]
 theorem matrixE8GridLeftInv_mul : matrixE8GridLeftInv * matrixE8Grid = 1 := by
-  decide
+  decide +kernel
 
 /-- If `V B = 1` for integer (or any commutative ring) matrices, then the rows of `B` span the
 whole free module: `v = (v V) B` is a combination of the rows of `B`. -/
@@ -145,7 +145,7 @@ theorem span_range_matrixE8Grid : Submodule.span ℤ (Set.range matrixE8Grid) = 
 /-- **The `E₈` computation**, (a): `B_{E₈}` is skew-symmetric. -/
 @[cluster_algebras "prop_exc_E8_computation"]
 theorem transpose_matrixE8Grid : matrixE8Gridᵀ = -matrixE8Grid := by
-  decide
+  decide +kernel
 
 /-- **The `E₈` computation**, (b): there is an exchange certificate for `B_{E₈}` with `128`
 variables and `25080` seeds. Checked by the kernel on the certificate data of
@@ -163,7 +163,7 @@ theorem nonempty_exchangeCertificate_matrixE8Grid :
 tree, `ClusterAlgebras.TypeE.CertificateData.E8Ref`). -/
 @[cluster_algebras "prop_exc_E8_computation"]
 theorem isReferenceMatrix_matrixE8Grid :
-    IsReferenceMatrix (.E 8 (by decide)) matrixE8Grid := by
+    IsReferenceMatrix (.E 8 (by decide +kernel)) matrixE8Grid := by
   intro P hP hA
   obtain ⟨w, τ, h⟩ := CertificateData.E8Ref.exists_matrixMutationList_eq P hP hA
   have href : CertificateData.E8Ref.refMatrix = matrixE8Grid := by
@@ -179,7 +179,7 @@ exactly `128` cluster variables, and has exactly `25080` clusters. -/
 @[cluster_algebras "lem_exc_E8"]
 theorem IsSeedPattern.isFiniteType_and_encard_E8 [CharZero K] {F : Type*} [Field F]
     [Algebra K F] {m : ℕ} (hmn : 8 ≤ m) {P : RegularTree 8 → SeedData F m 8}
-    (hP : IsSeedPattern K hmn P) (hX : IsPatternOfType hmn P [.E 8 (by decide)])
+    (hP : IsSeedPattern K hmn P) (hX : IsPatternOfType hmn P [.E 8 (by decide +kernel)])
     (hSubmatrixMatrixMutation : IsSkewSymmetrizingVector.SubmatrixMatrixMutation.{0})
     (hMatrixMutationMatrixMutation : MatrixMutationMatrixMutation.{0}) :
     IsFiniteType P ∧ (patternClusterVariables hmn P).encard = 128 ∧
@@ -452,7 +452,7 @@ def matrixLinearE7Ext : Matrix (Fin 8) (Fin 7) ℤ :=
 @[cluster_algebras "prop_exc_E6_computation"]
 theorem span_range_matrixLinearE_six : Submodule.span ℤ (Set.range (matrixLinearE 6)) = ⊤ :=
   span_range_eq_top_of_mul_eq_one (V := !![0, -1, 0, 0, 0, -1; 1, 0, 0, 0, 0, 0;
-    0, 0, 0, 0, 0, -1; 0, 0, 0, 0, -1, 0; 0, 0, 0, 1, 0, -1; 1, 0, 1, 0, 1, 0]) (by decide)
+    0, 0, 0, 0, 0, -1; 0, 0, 0, 0, -1, 0; 0, 0, 0, 1, 0, -1; 1, 0, 1, 0, 1, 0]) (by decide +kernel)
 
 /-- **The `E₆` computation**, (b): there is an exchange certificate for `B_{E₆}` with `42`
 variables and `833` seeds. Checked by the kernel on the certificate data of
@@ -469,7 +469,7 @@ theorem nonempty_exchangeCertificate_matrixLinearE_six :
 (`ClusterAlgebras.TypeE.CertificateData.E6Ref`). -/
 @[cluster_algebras "prop_exc_E6_computation"]
 theorem isReferenceMatrix_matrixLinearE_six :
-    IsReferenceMatrix (.E 6 (by decide)) (matrixLinearE 6) := by
+    IsReferenceMatrix (.E 6 (by decide +kernel)) (matrixLinearE 6) := by
   intro P hP hA
   obtain ⟨w, τ, h⟩ := CertificateData.E6Ref.exists_matrixMutationList_eq P hP hA
   have href : CertificateData.E6Ref.refMatrix = matrixLinearE 6 := by
@@ -483,7 +483,7 @@ theorem isReferenceMatrix_matrixLinearE_six :
 theorem span_range_matrixLinearE7Ext : Submodule.span ℤ (Set.range matrixLinearE7Ext) = ⊤ :=
   span_range_eq_top_of_mul_eq_one (V := !![0, -1, 0, 0, 0, 0, -1, 0;
     1, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, -1, 0; 1, 0, 1, 0, 0, 0, 0, -1;
-    0, 0, 0, 0, 0, -1, 0, 0; 1, 0, 1, 0, 1, 0, 0, -1; 0, 0, 0, 0, 0, 0, 0, 1]) (by decide)
+    0, 0, 0, 0, 0, -1, 0, 0; 1, 0, 1, 0, 1, 0, 0, -1; 0, 0, 0, 0, 0, 0, 0, 1]) (by decide +kernel)
 
 /-- **The `E₇` computation**, (b): there are exchange certificates for `B_{E₇}` and for `B̃_{E₇}`,
 each with `70` variables and `4160` seeds. Checked by the kernel on the certificate data of
@@ -504,7 +504,7 @@ theorem nonempty_exchangeCertificate_matrixLinearE_seven :
 (`ClusterAlgebras.TypeE.CertificateData.E7Ref`). -/
 @[cluster_algebras "prop_exc_E7_computation"]
 theorem isReferenceMatrix_matrixLinearE_seven :
-    IsReferenceMatrix (.E 7 (by decide)) (matrixLinearE 7) := by
+    IsReferenceMatrix (.E 7 (by decide +kernel)) (matrixLinearE 7) := by
   intro P hP hA
   obtain ⟨w, τ, h⟩ := CertificateData.E7Ref.exists_matrixMutationList_eq P hP hA
   have href : CertificateData.E7Ref.refMatrix = matrixLinearE 7 := by
@@ -520,7 +520,7 @@ cluster variables and `833` clusters. -/
 @[cluster_algebras "prop_type_E_counts"]
 theorem IsSeedPattern.encard_of_isPatternOfType_E6 [CharZero K] (hmn : 6 ≤ m)
     {P : RegularTree 6 → SeedData F m 6} (hP : IsSeedPattern K hmn P)
-    (hX : IsPatternOfType hmn P [.E 6 (by decide)])
+    (hX : IsPatternOfType hmn P [.E 6 (by decide +kernel)])
     (hSubmatrixMatrixMutation : IsSkewSymmetrizingVector.SubmatrixMatrixMutation.{0})
     (hMatrixMutationMatrixMutation : MatrixMutationMatrixMutation.{0}) :
     (patternClusterVariables hmn P).encard = 42 ∧ (patternClusters hmn P).encard = 833 := by
@@ -528,7 +528,7 @@ theorem IsSeedPattern.encard_of_isPatternOfType_E6 [CharZero K] (hmn : 6 ≤ m)
   exact (ExchangeCertificate.isFiniteType_and_encard_of_isPatternOfType
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-    (skewSymmetrizable_of_transpose_eq_neg (by decide)) isReferenceMatrix_matrixLinearE_six
+    (skewSymmetrizable_of_transpose_eq_neg (by decide +kernel)) isReferenceMatrix_matrixLinearE_six
     le_rfl rfl span_range_matrixLinearE_six C C hmn hP hX).2
 
 /-- **Cluster variables and clusters in type `E₇`**: a seed pattern of type `E₇` has `70`
@@ -536,17 +536,17 @@ cluster variables and `4160` clusters. -/
 @[cluster_algebras "prop_type_E_counts"]
 theorem IsSeedPattern.encard_of_isPatternOfType_E7 [CharZero K] (hmn : 7 ≤ m)
     {P : RegularTree 7 → SeedData F m 7} (hP : IsSeedPattern K hmn P)
-    (hX : IsPatternOfType hmn P [.E 7 (by decide)])
+    (hX : IsPatternOfType hmn P [.E 7 (by decide +kernel)])
     (hSubmatrixMatrixMutation : IsSkewSymmetrizingVector.SubmatrixMatrixMutation.{0})
     (hMatrixMutationMatrixMutation : MatrixMutationMatrixMutation.{0}) :
     (patternClusterVariables hmn P).encard = 70 ∧ (patternClusters hmn P).encard = 4160 := by
   obtain ⟨⟨C₀⟩, ⟨C₁⟩⟩ := nonempty_exchangeCertificate_matrixLinearE_seven
   have hpp : principalPart (by decide : 7 ≤ 8) matrixLinearE7Ext = matrixLinearE 7 := by
-    decide
+    decide +kernel
   exact (ExchangeCertificate.isFiniteType_and_encard_of_isPatternOfType
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-    (skewSymmetrizable_of_transpose_eq_neg (by decide)) isReferenceMatrix_matrixLinearE_seven
+    (skewSymmetrizable_of_transpose_eq_neg (by decide +kernel)) isReferenceMatrix_matrixLinearE_seven
     (by decide : 7 ≤ 8) hpp span_range_matrixLinearE7Ext C₀ C₁ hmn hP hX).2
 
 /-- **Cluster variables and clusters in type `E₈`**: a seed pattern of type `E₈` has `128`
@@ -554,7 +554,7 @@ cluster variables and `25080` clusters. -/
 @[cluster_algebras "prop_type_E_counts"]
 theorem IsSeedPattern.encard_of_isPatternOfType_E8 [CharZero K] (hmn : 8 ≤ m)
     {P : RegularTree 8 → SeedData F m 8} (hP : IsSeedPattern K hmn P)
-    (hX : IsPatternOfType hmn P [.E 8 (by decide)])
+    (hX : IsPatternOfType hmn P [.E 8 (by decide +kernel)])
     (hSubmatrixMatrixMutation : IsSkewSymmetrizingVector.SubmatrixMatrixMutation.{0})
     (hMatrixMutationMatrixMutation : MatrixMutationMatrixMutation.{0}) :
     (patternClusterVariables hmn P).encard = 128 ∧ (patternClusters hmn P).encard = 25080 :=

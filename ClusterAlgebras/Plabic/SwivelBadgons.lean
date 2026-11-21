@@ -1795,7 +1795,7 @@ private theorem hasBadgon_swivelMove_of_walks_two (hX : X.IsTripleDiagram) {d₁
   by_cases ha : h (X.toFaceOrbit a₂) = 0
   · have hb₂out : X.isOut b₂ ≠ X.isOut (X.inv d₂) := by
       have e2 : b₂ = (X.rot ^ 2) d₂ := by rw [pow_two, Equiv.Perm.mul_apply, g1, g2]
-      rw [e2, hpre.isOut_rot_pow_apply hi₂, ite_eq_left (by decide),
+      rw [e2, hpre.isOut_rot_pow_apply hi₂, ite_eq_left (by decide +kernel),
         hpre.isOut_inv_apply (hd.notMem_bdry.2)]
       cases X.isOut d₂ <;> simp
     refine hasBadgon_swivelMove_of_walks hX hd hmono hA0 (by omega) hAB hBB hAc hBc hvA0 hu huint
@@ -2203,7 +2203,7 @@ theorem hasBadgon_swivelMove_of_isParallelDigon (hX : X.IsTripleDiagram) {d₁ :
   obtain ⟨a₁, a₂, a₃, a₄, b₁, b₂, b₃, b₄, h1, h2, h3, h4, h5, g1, g2, g3, g4, g5, hnd, hV₁, hV₂,
     hi₁, hi₂⟩ := hd.exists_darts hpre
   have o2 : X.isOut ((X.rot ^ 2) d₁) = X.isOut d₁ := by
-    rw [hpre.isOut_rot_pow_apply hi₁, ite_eq_left (by decide)]
+    rw [hpre.isOut_rot_pow_apply hi₁, ite_eq_left (by decide +kernel)]
   have o3 : X.isOut ((X.rot ^ 3) d₁) = !X.isOut d₁ := hpre.isOut_rot_pow_three_apply hi₁
   have od₂ : X.isOut (X.inv (X.facePerm d₁)) = !X.isOut d₁ := by
     have hy : ¬X.IsBoundaryVertex (X.vertexOf (X.inv d₁)) := by
@@ -2862,10 +2862,10 @@ private theorem eq_of_rot_pow_three_swivelMove_notMem (hX : X.IsPreTripleDiagram
   have q2 : (X.rot ^ 2) (X.facePerm d₁) = b₂ := by rw [pow_two, Equiv.Perm.mul_apply, g1, g2]
   have q3 : (X.rot ^ 3) (X.facePerm d₁) = b₃ := by rw [X.rot_pow_three_apply, g1, g2, g3]
   have o2 : X.isOut a₂ = X.isOut d₁ := by
-    rw [← p2, hX.isOut_rot_pow_apply hi₁, ite_eq_left (by decide)]
+    rw [← p2, hX.isOut_rot_pow_apply hi₁, ite_eq_left (by decide +kernel)]
   have o3 : X.isOut a₃ = !X.isOut d₁ := by rw [← p3, hX.isOut_rot_pow_three_apply hi₁]
   have o2' : X.isOut b₂ = X.isOut d₁ := by
-    rw [← q2, hX.isOut_rot_pow_apply hi₂, ite_eq_left (by decide), od₂]
+    rw [← q2, hX.isOut_rot_pow_apply hi₂, ite_eq_left (by decide +kernel), od₂]
   have o3' : X.isOut b₃ = !X.isOut d₁ := by rw [← q3, hX.isOut_rot_pow_three_apply hi₂, od₂]
   have hr : ∀ z, ((X.swivelMove d₁).rot ^ 3) z =
       X.swivelRot d₁ (X.swivelRot d₁ (X.swivelRot d₁ z)) :=

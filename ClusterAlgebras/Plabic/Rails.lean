@@ -1165,13 +1165,13 @@ private def closedOneDiagram : TripleData (Fin 36) 4 where
       23, 28, 1, 26, 31, 0, 29, 34, 5, 32, 13]
     [30, 27, 7, 6, 12, 33, 3, 2, 24, 21, 18, 15, 4, 35, 16, 11, 14, 19, 10, 17, 22, 9, 20, 25, 8,
       23, 28, 1, 26, 31, 0, 29, 34, 5, 32, 13]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 36
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 14, 12, 13, 17, 15, 16, 20, 18, 19, 23, 21, 22, 26,
       24, 25, 29, 27, 28, 32, 30, 31, 35, 33, 34]
     [5, 0, 1, 2, 3, 4, 11, 6, 7, 8, 9, 10, 13, 14, 12, 16, 17, 15, 19, 20, 18, 22, 23, 21, 25,
       26, 24, 28, 29, 27, 31, 32, 30, 34, 35, 33]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 12 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 36 (12 + 3 * r.val)
   isOut d :=
@@ -1184,14 +1184,14 @@ dart `6(1 + j)`. -/
 private def closedOneRail : closedOneDiagram.ClosedAlignedRail 1 where
   rho j := Fin.ofNat 36 (6 * j)
   eta j := Fin.ofNat 36 (6 * (1 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   inv_rho_three := by decide +kernel
   inv_eta_three := by decide +kernel
   inv_rho_one := fun j h₁ h₂ => by omega
   inv_rho_two := fun j h₁ h₂ => by omega
   one_le := by decide +kernel
-  vertexOf_rho_mem := by rw [DiskMap.vertexOf_mem_internalVertices]; decide
+  vertexOf_rho_mem := by rw [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
   vertexOf_rho_ne := by decide +kernel
   inv_rho_three_last := by decide +kernel
   inv_eta_three_last := by decide +kernel
@@ -1236,13 +1236,13 @@ private def alignedOneDiagram : TripleData (Fin 48) 5 where
       10, 23, 28, 9, 26, 31, 15, 29, 34, 14, 32, 37, 13, 35, 40, 1, 38, 43, 0, 41, 46, 5, 44, 19]
     [42, 39, 12, 6, 18, 45, 3, 17, 16, 27, 24, 21, 2, 36, 33, 30, 8, 7, 4, 47, 22, 11, 20, 25,
       10, 23, 28, 9, 26, 31, 15, 29, 34, 14, 32, 37, 13, 35, 40, 1, 38, 43, 0, 41, 46, 5, 44, 19]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 48
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 13, 14, 15, 16, 17, 12, 20, 18, 19, 23, 21, 22, 26,
       24, 25, 29, 27, 28, 32, 30, 31, 35, 33, 34, 38, 36, 37, 41, 39, 40, 44, 42, 43, 47, 45, 46]
     [5, 0, 1, 2, 3, 4, 11, 6, 7, 8, 9, 10, 17, 12, 13, 14, 15, 16, 19, 20, 18, 22, 23, 21, 25,
       26, 24, 28, 29, 27, 31, 32, 30, 34, 35, 33, 37, 38, 36, 40, 41, 39, 43, 44, 42, 46, 47, 45]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 18 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 48 (18 + 3 * r.val)
   isOut d :=
@@ -1256,12 +1256,12 @@ dart `6(1 + j)`. -/
 private def alignedOneRail : alignedOneDiagram.AlignedRail 1 where
   rho j := Fin.ofNat 48 (6 * j)
   eta j := Fin.ofNat 48 (6 * (1 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   inv_rho_three := by decide +kernel
   inv_eta_three := by decide +kernel
-  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide
-  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide
+  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide +kernel
+  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide +kernel
 
 -- The darts at the points of the rail.
 example : alignedOneRail.darts.card = 18 := by decide +kernel
@@ -1303,13 +1303,13 @@ private def staggeredOneDiagram : TripleData (Fin 48) 5 where
       10, 23, 28, 9, 26, 31, 8, 29, 34, 15, 32, 37, 14, 35, 40, 13, 38, 43, 0, 41, 46, 5, 44, 19]
     [42, 12, 17, 6, 18, 45, 3, 16, 30, 27, 24, 21, 1, 39, 36, 33, 7, 2, 4, 47, 22, 11, 20, 25,
       10, 23, 28, 9, 26, 31, 8, 29, 34, 15, 32, 37, 14, 35, 40, 13, 38, 43, 0, 41, 46, 5, 44, 19]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 48
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 13, 14, 15, 16, 17, 12, 20, 18, 19, 23, 21, 22, 26,
       24, 25, 29, 27, 28, 32, 30, 31, 35, 33, 34, 38, 36, 37, 41, 39, 40, 44, 42, 43, 47, 45, 46]
     [5, 0, 1, 2, 3, 4, 11, 6, 7, 8, 9, 10, 17, 12, 13, 14, 15, 16, 19, 20, 18, 22, 23, 21, 25,
       26, 24, 28, 29, 27, 31, 32, 30, 34, 35, 33, 37, 38, 36, 40, 41, 39, 43, 44, 42, 46, 47, 45]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 18 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 48 (18 + 3 * r.val)
   isOut d :=
@@ -1323,14 +1323,14 @@ dart `6(1 + j)`. -/
 private def staggeredOneRail : staggeredOneDiagram.StaggeredRail 1 where
   rho j := Fin.ofNat 48 (6 * j)
   eta j := Fin.ofNat 48 (6 * (1 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   one_le := by decide +kernel
   inv_rho_three := by decide +kernel
   inv_rho_zero_one := by decide +kernel
   inv_eta_three := fun j h₁ h₂ => by omega
-  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide
-  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide
+  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide +kernel
+  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide +kernel
 
 -- The darts at the points of the rail.
 example : staggeredOneRail.darts.card = 18 := by decide +kernel
@@ -1375,7 +1375,7 @@ private def closedTwoDiagram : TripleData (Fin 60) 6 where
     [54, 51, 18, 6, 24, 57, 3, 23, 22, 12, 30, 27, 9, 21, 42, 39, 36, 33, 2, 48, 45, 13, 8, 7, 4,
       59, 28, 11, 26, 31, 10, 29, 34, 17, 32, 37, 16, 35, 40, 15, 38, 43, 14, 41, 46, 20, 44, 49,
       19, 47, 52, 1, 50, 55, 0, 53, 58, 5, 56, 25]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 60
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 13, 14, 15, 16, 17, 12, 19, 20, 21, 22, 23, 18, 26,
       24, 25, 29, 27, 28, 32, 30, 31, 35, 33, 34, 38, 36, 37, 41, 39, 40, 44, 42, 43, 47, 45, 46,
@@ -1383,7 +1383,7 @@ private def closedTwoDiagram : TripleData (Fin 60) 6 where
     [5, 0, 1, 2, 3, 4, 11, 6, 7, 8, 9, 10, 17, 12, 13, 14, 15, 16, 23, 18, 19, 20, 21, 22, 25,
       26, 24, 28, 29, 27, 31, 32, 30, 34, 35, 33, 37, 38, 36, 40, 41, 39, 43, 44, 42, 46, 47, 45,
       49, 50, 48, 52, 53, 51, 55, 56, 54, 58, 59, 57]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 24 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 60 (24 + 3 * r.val)
   isOut d :=
@@ -1398,14 +1398,14 @@ dart `6(2 + j)`. -/
 private def closedTwoRail : closedTwoDiagram.ClosedAlignedRail 2 where
   rho j := Fin.ofNat 60 (6 * j)
   eta j := Fin.ofNat 60 (6 * (2 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   inv_rho_three := by decide +kernel
   inv_eta_three := by decide +kernel
-  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide
-  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide
+  inv_rho_one := fun j h₁ h₂ => by interval_cases j; decide +kernel
+  inv_rho_two := fun j h₁ h₂ => by interval_cases j; decide +kernel
   one_le := by decide +kernel
-  vertexOf_rho_mem := by rw [DiskMap.vertexOf_mem_internalVertices]; decide
+  vertexOf_rho_mem := by rw [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
   vertexOf_rho_ne := by decide +kernel
   inv_rho_three_last := by decide +kernel
   inv_eta_three_last := by decide +kernel
@@ -1434,7 +1434,7 @@ private def alignedTwoDiagram : TripleData (Fin 72) 7 where
       21, 54, 51, 48, 14, 13, 4, 71, 34, 11, 32, 37, 10, 35, 40, 17, 38, 43, 16, 41, 46, 15, 44,
       49, 27, 47, 52, 26, 50, 55, 25, 53, 58, 20, 56, 61, 19, 59, 64, 1, 62, 67, 0, 65, 70, 5,
       68, 31]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 72
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 13, 14, 15, 16, 17, 12, 19, 20, 21, 22, 23, 18, 25,
       26, 27, 28, 29, 24, 32, 30, 31, 35, 33, 34, 38, 36, 37, 41, 39, 40, 44, 42, 43, 47, 45, 46,
@@ -1444,7 +1444,7 @@ private def alignedTwoDiagram : TripleData (Fin 72) 7 where
       24, 25, 26, 27, 28, 31, 32, 30, 34, 35, 33, 37, 38, 36, 40, 41, 39, 43, 44, 42, 46, 47, 45,
       49, 50, 48, 52, 53, 51, 55, 56, 54, 58, 59, 57, 61, 62, 60, 64, 65, 63, 67, 68, 66, 70, 71,
       69]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 30 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 72 (30 + 3 * r.val)
   isOut d :=
@@ -1460,8 +1460,8 @@ dart `6(2 + j)`. -/
 private def alignedTwoRail : alignedTwoDiagram.AlignedRail 2 where
   rho j := Fin.ofNat 72 (6 * j)
   eta j := Fin.ofNat 72 (6 * (2 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   inv_rho_three := by decide +kernel
   inv_eta_three := by decide +kernel
   inv_rho_one := fun j h₁ h₂ => by interval_cases j <;> decide
@@ -1491,7 +1491,7 @@ private def staggeredTwoDiagram : TripleData (Fin 72) 7 where
       21, 57, 54, 51, 13, 8, 4, 71, 34, 11, 32, 37, 10, 35, 40, 17, 38, 43, 16, 41, 46, 15, 44,
       49, 14, 47, 52, 27, 50, 55, 26, 53, 58, 25, 56, 61, 20, 59, 64, 19, 62, 67, 0, 65, 70, 5,
       68, 31]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   rot := listPerm 72
     [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 6, 13, 14, 15, 16, 17, 12, 19, 20, 21, 22, 23, 18, 25,
       26, 27, 28, 29, 24, 32, 30, 31, 35, 33, 34, 38, 36, 37, 41, 39, 40, 44, 42, 43, 47, 45, 46,
@@ -1501,7 +1501,7 @@ private def staggeredTwoDiagram : TripleData (Fin 72) 7 where
       24, 25, 26, 27, 28, 31, 32, 30, 34, 35, 33, 37, 38, 36, 40, 41, 39, 43, 44, 42, 46, 47, 45,
       49, 50, 48, 52, 53, 51, 55, 56, 54, 58, 59, 57, 61, 62, 60, 64, 65, 63, 67, 68, 66, 70, 71,
       69]
-    (by decide) (by decide)
+    (by decide +kernel) (by decide +kernel)
   bdry := univ.filter fun d => 30 ≤ d.val ∧ d.val % 3 ≠ 0
   endDart r := Fin.ofNat 72 (30 + 3 * r.val)
   isOut d :=
@@ -1517,12 +1517,12 @@ dart `6(2 + j)`. -/
 private def staggeredTwoRail : staggeredTwoDiagram.StaggeredRail 2 where
   rho j := Fin.ofNat 72 (6 * j)
   eta j := Fin.ofNat 72 (6 * (2 + j))
-  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide
-  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide
+  vertexOf_mem := by simp only [DiskMap.vertexOf_mem_internalVertices]; decide +kernel
+  injOn_vertexOf := by simp only [Set.InjOn, mem_coe]; decide +kernel
   one_le := by decide +kernel
   inv_rho_three := by decide +kernel
   inv_rho_zero_one := by decide +kernel
-  inv_eta_three := fun j h₁ h₂ => by interval_cases j; decide
+  inv_eta_three := fun j h₁ h₂ => by interval_cases j; decide +kernel
   inv_rho_two := fun j h₁ h₂ => by interval_cases j <;> decide
   inv_rho_one := fun j h₁ h₂ => by interval_cases j <;> decide
 

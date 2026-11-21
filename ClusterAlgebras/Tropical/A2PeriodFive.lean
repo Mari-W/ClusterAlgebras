@@ -388,20 +388,20 @@ theorem a2_seedMutation_period_five [CharZero K] (hmn : 2 ≤ m) {S : SeedData F
     refine ⟨funext fun j => ?_, funext fun j => ?_, hB⟩ <;> fin_cases j <;> rfl
   have hX₁ := hcl 1 (by norm_num) 0
   have hT1 := hT 0 (by norm_num)
-  rw [hT0, ite_eq_left (by decide), SeedTriple.a2_triple_one hf] at hT1
+  rw [hT0, ite_eq_left (by decide +kernel), SeedTriple.a2_triple_one hf] at hT1
   rw [hT1] at hX₁
   have hX₂ := hcl 2 (by norm_num) 1
   have hT2 := hT 1 (by norm_num)
-  rw [hT1, ite_eq_right (by decide), SeedTriple.a2_triple_two hf hx₁0 hx₂0] at hT2
+  rw [hT1, ite_eq_right (by decide +kernel), SeedTriple.a2_triple_two hf hx₁0 hx₂0] at hT2
   rw [hT2] at hX₂
   have hX₃ := hcl 3 (by norm_num) 0
   have hT3 := hT 2 (by norm_num)
-  rw [hT2, ite_eq_left (by decide), SeedTriple.a2_triple_three hf hx₁0 hx₂0 _ _ hX₁] at hT3
+  rw [hT2, ite_eq_left (by decide +kernel), SeedTriple.a2_triple_three hf hx₁0 hx₂0 _ _ hX₁] at hT3
   rw [hT3] at hX₃
   have hT4 := hT 3 (by norm_num)
-  rw [hT3, ite_eq_right (by decide), SeedTriple.a2_triple_four hf hx₁0 hx₂0 _ _ hX₂] at hT4
+  rw [hT3, ite_eq_right (by decide +kernel), SeedTriple.a2_triple_four hf hx₁0 hx₂0 _ _ hX₂] at hT4
   have hT5 := hT 4 (by norm_num)
-  rw [hT4, ite_eq_left (by decide), SeedTriple.a2_triple_five hf hx₂0 _ _ hX₃] at hT5
+  rw [hT4, ite_eq_left (by decide +kernel), SeedTriple.a2_triple_five hf hx₂0 _ _ hX₃] at hT5
   refine SeedData.eq_of_toSeedTriple_eq hmn
     (hT5.trans (SeedData.toSeedTriple_swap_of_a2 hmn hB).symm) ((hfroz 5 le_rfl).trans ?_)
   funext i

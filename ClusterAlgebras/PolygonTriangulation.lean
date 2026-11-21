@@ -247,14 +247,14 @@ def squareTriangulation : Finset (Sym2 (ZMod 4)) := {s(0, 2)}
 /-- The single diagonal `{0,2}` is a triangulation of the square: it is a diagonal, it crosses
 nothing in the set, and the only other diagonal `{1,3}` crosses it. -/
 theorem isTriangulation_squareTriangulation : IsTriangulation squareTriangulation where
-  isDiagonal := by decide
-  noncrossing := by decide
-  maximal := by decide
+  isDiagonal := by decide +kernel
+  noncrossing := by decide +kernel
+  maximal := by decide +kernel
 
 /-- `{0,1,2}` and `{0,2,3}` are triangles of `squareTriangulation`, while `{0,1,3}` is not. -/
 theorem isTriangle_squareTriangulation :
     IsTriangle squareTriangulation {0, 1, 2} ∧ IsTriangle squareTriangulation {0, 2, 3} ∧
-      ¬IsTriangle squareTriangulation {0, 1, 3} := by decide
+      ¬IsTriangle squareTriangulation {0, 1, 3} := by decide +kernel
 
 /-- **The quiver of the square triangulated by `{0,2}`**: there are arrows from `{1,2}` and
 `{3,0}` to `{0,2}` and from `{0,2}` to `{0,1}` and `{2,3}`, there is no arrow from `{0,2}` to
@@ -265,21 +265,21 @@ theorem polygonArrows_squareTriangulation :
       polygonArrows squareTriangulation s(0, 2) s(0, 1) = 1 ∧
       polygonArrows squareTriangulation s(0, 2) s(2, 3) = 1 ∧
       polygonArrows squareTriangulation s(0, 2) s(1, 2) = 0 ∧
-      polygonArrows squareTriangulation s(0, 1) s(1, 2) = 0 := by decide
+      polygonArrows squareTriangulation s(0, 1) s(1, 2) = 0 := by decide +kernel
 
 /-- The fan of the hexagon from vertex `0`. -/
 def hexagonFan : Finset (Sym2 (ZMod 6)) := {s(0, 2), s(0, 3), s(0, 4)}
 
 /-- The fan is a triangulation of the hexagon. -/
 theorem isTriangulation_hexagonFan : IsTriangulation hexagonFan where
-  isDiagonal := by decide
-  noncrossing := by decide
-  maximal := by decide
+  isDiagonal := by decide +kernel
+  noncrossing := by decide +kernel
+  maximal := by decide +kernel
 
 /-- Not every diagonal outside the hexagon fan crosses every element of the fan: the
 diagonal `{1,3}` does not cross `{0,4}`. -/
 theorem not_forall_cross_hexagonFan :
     ¬∀ e : Sym2 (ZMod 6), IsDiagonal e → e ∉ hexagonFan → ∀ f ∈ hexagonFan, Cross e f :=
-  fun h => absurd (h s(1, 3) (by decide) (by decide) s(0, 4) (by decide)) (by decide)
+  fun h => absurd (h s(1, 3) (by decide +kernel) (by decide +kernel) s(0, 4) (by decide +kernel)) (by decide +kernel)
 
 end ClusterAlgebras

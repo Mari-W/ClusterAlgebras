@@ -250,10 +250,10 @@ theorem not_isTwoFinite_of_isF4AffineShape {B : Matrix (Fin N) (Fin N) ℤ}
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := f4AffineOrientation) (by norm_num) (by decide) (by decide)
-    ⟨![2, 2, 1, 1, 1], by decide, by decide⟩ (by decide)
+      (Z := f4AffineOrientation) (by norm_num) (by decide +kernel) (by decide +kernel)
+    ⟨![2, 2, 1, 1, 1], by decide +kernel, by decide +kernel⟩ (by decide +kernel)
     (not_isTwoFinite_of_three_lt_diagramWeight
-      (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [2, 1, 3, 0, 2] 3 4 (by decide)) hS
+      (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [2, 1, 3, 0, 2] 3 4 (by decide +kernel)) hS
 
 /-- **No matrix of shape `G₂^{(1)}(a)`, `a ∈ {1, 2, 3}`, is `2`-finite.** -/
 @[cluster_algebras "lem_extended_FG"]
@@ -270,26 +270,26 @@ theorem not_isTwoFinite_of_isG2AffineShape {B : Matrix (Fin N) (Fin N) ℤ} {a :
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := g2AffineOrientation 1) (by norm_num) (by decide)
-      (by decide) ⟨![3, 1, 1], by decide, by decide⟩ (by decide)
+      (Z := g2AffineOrientation 1) (by norm_num) (by decide +kernel)
+      (by decide +kernel) ⟨![3, 1, 1], by decide +kernel, by decide +kernel⟩ (by decide +kernel)
       (not_isTwoFinite_of_three_lt_diagramWeight
-          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1, 0] 1 2 (by decide)) hS
+          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1, 0] 1 2 (by decide +kernel)) hS
   · exact not_isTwoFinite_of_isShapeOf (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := g2AffineOrientation 2) (by norm_num) (by decide)
-      (by decide) ⟨![6, 2, 1], by decide, by decide⟩ (by decide)
+      (Z := g2AffineOrientation 2) (by norm_num) (by decide +kernel)
+      (by decide +kernel) ⟨![6, 2, 1], by decide +kernel, by decide +kernel⟩ (by decide +kernel)
       (not_isTwoFinite_of_three_lt_diagramWeight
-          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1] 0 2 (by decide)) hS
+          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1] 0 2 (by decide +kernel)) hS
   · exact not_isTwoFinite_of_isShapeOf (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := g2AffineOrientation 3) (by norm_num) (by decide)
-      (by decide) ⟨![9, 3, 1], by decide, by decide⟩ (by decide)
+      (Z := g2AffineOrientation 3) (by norm_num) (by decide +kernel)
+      (by decide +kernel) ⟨![9, 3, 1], by decide +kernel, by decide +kernel⟩ (by decide +kernel)
       (not_isTwoFinite_of_three_lt_diagramWeight
-          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1] 0 2 (by decide)) hS
+          (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1] 0 2 (by decide +kernel)) hS
 
 /-- **No matrix of shape `E₆^{(1)} = T_{2,2,2}` is `2`-finite.** -/
 @[cluster_algebras "lem_extended_E"]
@@ -304,11 +304,11 @@ theorem not_isTwoFinite_of_isE6AffineShape {B : Matrix (Fin N) (Fin N) ℤ}
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := e6AffineOrientation) (by norm_num) (by decide) (by decide)
-    ⟨fun _ => 1, by decide, by decide⟩ (by decide)
+      (Z := e6AffineOrientation) (by norm_num) (by decide +kernel) (by decide +kernel)
+    ⟨fun _ => 1, by decide +kernel, by decide +kernel⟩ (by decide +kernel)
     (not_isTwoFinite_of_three_lt_diagramWeight
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) [1, 2, 0, 3, 5, 2, 0, 4, 6] 1 2
-      (by decide)) hS
+      (by decide +kernel)) hS
 
 /-- **No matrix of shape `E₇^{(1)} = T_{1,3,3}` is `2`-finite.** -/
 @[cluster_algebras "lem_extended_E"]
@@ -323,12 +323,12 @@ theorem not_isTwoFinite_of_isE7AffineShape {B : Matrix (Fin N) (Fin N) ℤ}
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := e7AffineOrientation) (by norm_num) (by decide) (by decide)
-    ⟨fun _ => 1, by decide, by decide⟩ (by decide)
+      (Z := e7AffineOrientation) (by norm_num) (by decide +kernel) (by decide +kernel)
+    ⟨fun _ => 1, by decide +kernel, by decide +kernel⟩ (by decide +kernel)
     (not_isTwoFinite_of_three_lt_diagramWeight
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       [7, 3, 1, 0, 5, 6, 7, 2, 1, 0, 3, 1, 5, 4] 3 6
-        (by decide)) hS
+        (by decide +kernel)) hS
 
 set_option maxRecDepth 4000 in
 /-- **No matrix of shape `E₈^{(1)} = T_{1,2,5}` is `2`-finite.** -/
@@ -344,10 +344,10 @@ theorem not_isTwoFinite_of_isE8AffineShape {B : Matrix (Fin N) (Fin N) ℤ}
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hExistsMutationPathOfIsTreeOrientation := hExistsMutationPathOfIsTreeOrientation)
       (hSkewSymmetrizationMatrixMutation := hSkewSymmetrizationMatrixMutation)
-      (Z := e8AffineOrientation) (by norm_num) (by decide) (by decide)
-    ⟨fun _ => 1, by decide, by decide⟩ (by decide)
+      (Z := e8AffineOrientation) (by norm_num) (by decide +kernel) (by decide +kernel)
+    ⟨fun _ => 1, by decide +kernel, by decide +kernel⟩ (by decide +kernel)
     (not_isTwoFinite_of_three_lt_diagramWeight
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
-        [5, 4, 2, 8, 0, 6, 5, 1, 3, 7, 4, 1, 8, 7, 0, 4, 2, 7, 1, 5, 4, 6] 0 2 (by decide)) hS
+        [5, 4, 2, 8, 0, 6, 5, 1, 3, 7, 4, 1, 8, 7, 0, 4, 2, 7, 1, 5, 4, 6] 0 2 (by decide +kernel)) hS
 
 end ClusterAlgebras

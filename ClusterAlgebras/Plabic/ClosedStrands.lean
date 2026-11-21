@@ -902,7 +902,7 @@ theorem exists_isParallelDigon_of_isClosedStrand (hX : X.IsTripleDiagram)
         rcases mem_insert.1 this with h' | h'
         · have := hP.isOut_rot_pow_three_apply hx₁
           rw [← h', hu₂o, hu₁o] at this
-          exact absurd this (by decide)
+          exact absurd this (by decide +kernel)
         · exact hne (mem_singleton.1 h').symm
       have hv₂ : (X.rot ^ 3) u₂ ∈ X.vertexOf u₁ := by
         rw [X.mem_vertexOf_iff_vertexOf_eq, X.vertexOf_rot_pow_apply, hxy]
@@ -1951,36 +1951,36 @@ theorem hollowSwap_rot_pow_apply :
     X.hollowSwap c ((X.rot ^ 4) c) = (X.rot ^ 1) c ∧
     X.hollowSwap c ((X.rot ^ 5) c) = (X.rot ^ 0) c := by
   have hne := hollow_ne hX hc
-  have n01 : (X.rot ^ 0) c ≠ (X.rot ^ 1) c := hne 0 1 (by decide) (by decide) (by decide)
-  have n02 : (X.rot ^ 0) c ≠ (X.rot ^ 2) c := hne 0 2 (by decide) (by decide) (by decide)
-  have n03 : (X.rot ^ 0) c ≠ (X.rot ^ 3) c := hne 0 3 (by decide) (by decide) (by decide)
-  have n04 : (X.rot ^ 0) c ≠ (X.rot ^ 4) c := hne 0 4 (by decide) (by decide) (by decide)
-  have n05 : (X.rot ^ 0) c ≠ (X.rot ^ 5) c := hne 0 5 (by decide) (by decide) (by decide)
-  have n10 : (X.rot ^ 1) c ≠ (X.rot ^ 0) c := hne 1 0 (by decide) (by decide) (by decide)
-  have n12 : (X.rot ^ 1) c ≠ (X.rot ^ 2) c := hne 1 2 (by decide) (by decide) (by decide)
-  have n13 : (X.rot ^ 1) c ≠ (X.rot ^ 3) c := hne 1 3 (by decide) (by decide) (by decide)
-  have n14 : (X.rot ^ 1) c ≠ (X.rot ^ 4) c := hne 1 4 (by decide) (by decide) (by decide)
-  have n15 : (X.rot ^ 1) c ≠ (X.rot ^ 5) c := hne 1 5 (by decide) (by decide) (by decide)
-  have n20 : (X.rot ^ 2) c ≠ (X.rot ^ 0) c := hne 2 0 (by decide) (by decide) (by decide)
-  have n21 : (X.rot ^ 2) c ≠ (X.rot ^ 1) c := hne 2 1 (by decide) (by decide) (by decide)
-  have n23 : (X.rot ^ 2) c ≠ (X.rot ^ 3) c := hne 2 3 (by decide) (by decide) (by decide)
-  have n24 : (X.rot ^ 2) c ≠ (X.rot ^ 4) c := hne 2 4 (by decide) (by decide) (by decide)
-  have n25 : (X.rot ^ 2) c ≠ (X.rot ^ 5) c := hne 2 5 (by decide) (by decide) (by decide)
-  have n30 : (X.rot ^ 3) c ≠ (X.rot ^ 0) c := hne 3 0 (by decide) (by decide) (by decide)
-  have n31 : (X.rot ^ 3) c ≠ (X.rot ^ 1) c := hne 3 1 (by decide) (by decide) (by decide)
-  have n32 : (X.rot ^ 3) c ≠ (X.rot ^ 2) c := hne 3 2 (by decide) (by decide) (by decide)
-  have n34 : (X.rot ^ 3) c ≠ (X.rot ^ 4) c := hne 3 4 (by decide) (by decide) (by decide)
-  have n35 : (X.rot ^ 3) c ≠ (X.rot ^ 5) c := hne 3 5 (by decide) (by decide) (by decide)
-  have n40 : (X.rot ^ 4) c ≠ (X.rot ^ 0) c := hne 4 0 (by decide) (by decide) (by decide)
-  have n41 : (X.rot ^ 4) c ≠ (X.rot ^ 1) c := hne 4 1 (by decide) (by decide) (by decide)
-  have n42 : (X.rot ^ 4) c ≠ (X.rot ^ 2) c := hne 4 2 (by decide) (by decide) (by decide)
-  have n43 : (X.rot ^ 4) c ≠ (X.rot ^ 3) c := hne 4 3 (by decide) (by decide) (by decide)
-  have n45 : (X.rot ^ 4) c ≠ (X.rot ^ 5) c := hne 4 5 (by decide) (by decide) (by decide)
-  have n50 : (X.rot ^ 5) c ≠ (X.rot ^ 0) c := hne 5 0 (by decide) (by decide) (by decide)
-  have n51 : (X.rot ^ 5) c ≠ (X.rot ^ 1) c := hne 5 1 (by decide) (by decide) (by decide)
-  have n52 : (X.rot ^ 5) c ≠ (X.rot ^ 2) c := hne 5 2 (by decide) (by decide) (by decide)
-  have n53 : (X.rot ^ 5) c ≠ (X.rot ^ 3) c := hne 5 3 (by decide) (by decide) (by decide)
-  have n54 : (X.rot ^ 5) c ≠ (X.rot ^ 4) c := hne 5 4 (by decide) (by decide) (by decide)
+  have n01 : (X.rot ^ 0) c ≠ (X.rot ^ 1) c := hne 0 1 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n02 : (X.rot ^ 0) c ≠ (X.rot ^ 2) c := hne 0 2 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n03 : (X.rot ^ 0) c ≠ (X.rot ^ 3) c := hne 0 3 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n04 : (X.rot ^ 0) c ≠ (X.rot ^ 4) c := hne 0 4 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n05 : (X.rot ^ 0) c ≠ (X.rot ^ 5) c := hne 0 5 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n10 : (X.rot ^ 1) c ≠ (X.rot ^ 0) c := hne 1 0 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n12 : (X.rot ^ 1) c ≠ (X.rot ^ 2) c := hne 1 2 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n13 : (X.rot ^ 1) c ≠ (X.rot ^ 3) c := hne 1 3 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n14 : (X.rot ^ 1) c ≠ (X.rot ^ 4) c := hne 1 4 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n15 : (X.rot ^ 1) c ≠ (X.rot ^ 5) c := hne 1 5 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n20 : (X.rot ^ 2) c ≠ (X.rot ^ 0) c := hne 2 0 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n21 : (X.rot ^ 2) c ≠ (X.rot ^ 1) c := hne 2 1 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n23 : (X.rot ^ 2) c ≠ (X.rot ^ 3) c := hne 2 3 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n24 : (X.rot ^ 2) c ≠ (X.rot ^ 4) c := hne 2 4 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n25 : (X.rot ^ 2) c ≠ (X.rot ^ 5) c := hne 2 5 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n30 : (X.rot ^ 3) c ≠ (X.rot ^ 0) c := hne 3 0 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n31 : (X.rot ^ 3) c ≠ (X.rot ^ 1) c := hne 3 1 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n32 : (X.rot ^ 3) c ≠ (X.rot ^ 2) c := hne 3 2 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n34 : (X.rot ^ 3) c ≠ (X.rot ^ 4) c := hne 3 4 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n35 : (X.rot ^ 3) c ≠ (X.rot ^ 5) c := hne 3 5 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n40 : (X.rot ^ 4) c ≠ (X.rot ^ 0) c := hne 4 0 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n41 : (X.rot ^ 4) c ≠ (X.rot ^ 1) c := hne 4 1 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n42 : (X.rot ^ 4) c ≠ (X.rot ^ 2) c := hne 4 2 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n43 : (X.rot ^ 4) c ≠ (X.rot ^ 3) c := hne 4 3 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n45 : (X.rot ^ 4) c ≠ (X.rot ^ 5) c := hne 4 5 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n50 : (X.rot ^ 5) c ≠ (X.rot ^ 0) c := hne 5 0 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n51 : (X.rot ^ 5) c ≠ (X.rot ^ 1) c := hne 5 1 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n52 : (X.rot ^ 5) c ≠ (X.rot ^ 2) c := hne 5 2 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n53 : (X.rot ^ 5) c ≠ (X.rot ^ 3) c := hne 5 3 (by decide +kernel) (by decide +kernel) (by decide +kernel)
+  have n54 : (X.rot ^ 5) c ≠ (X.rot ^ 4) c := hne 5 4 (by decide +kernel) (by decide +kernel) (by decide +kernel)
   rw [hollowSwap_eq hX hc]
   simp only [Perm.mul_apply, swap_apply_left, swap_apply_right]
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
@@ -2027,10 +2027,10 @@ theorem isOut_hollowSwap {d : H} (hd : d ∈ X.vertexOf c) :
   have ho := hX.isOut_rot_pow_apply hx
   interval_cases k
   · rw [v0, ho, ho]; simp [show ¬Even 5 by decide]
-  · rw [v1, ho, ho]; simp [show ¬Even 1 by decide, show Even 4 by decide]
-  · rw [v2, ho, ho]; simp [show ¬Even 3 by decide, show Even 2 by decide]
-  · rw [v3, ho, ho]; simp [show ¬Even 3 by decide, show Even 2 by decide]
-  · rw [v4, ho, ho]; simp [show ¬Even 1 by decide, show Even 4 by decide]
+  · rw [v1, ho, ho]; simp [show ¬Even 1 by decide +kernel, show Even 4 by decide]
+  · rw [v2, ho, ho]; simp [show ¬Even 3 by decide +kernel, show Even 2 by decide]
+  · rw [v3, ho, ho]; simp [show ¬Even 3 by decide +kernel, show Even 2 by decide]
+  · rw [v4, ho, ho]; simp [show ¬Even 1 by decide +kernel, show Even 4 by decide]
   · rw [v5, ho, ho]; simp [show ¬Even 5 by decide]
 
 /-- No dart of `B` lies at `x`. -/

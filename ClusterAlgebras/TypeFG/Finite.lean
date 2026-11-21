@@ -157,8 +157,8 @@ instance instDecidableEqD₄FoldGroup : DecidableEq D₄FoldGroup :=
 @[cluster_algebras "def_fg_G2_D4"]
 instance instMulActionD₄FoldGroup : MulAction D₄FoldGroup (Fin 4) where
   smul g i := d₄Rotation^[(Multiplicative.toAdd (g : Multiplicative (ZMod 3))).val] i
-  one_smul := by decide
-  mul_smul := by decide
+  one_smul := by decide +kernel
+  mul_smul := by decide +kernel
 
 /-- The class of `a` acts on `Fin 4` by `gᵃ`. -/
 theorem d₄FoldGroup_smul_def (g : D₄FoldGroup) (i : Fin 4) :
@@ -171,7 +171,7 @@ theorem mem_orbit_d₄FoldGroup_iff {i i' : Fin 4} :
     i' ∈ orbit D₄FoldGroup i ↔ i' = i ∨ i' = d₄Rotation i ∨ i' = d₄Rotation (d₄Rotation i) := by
   rw [mem_orbit_iff]
   revert i i'
-  decide
+  decide +kernel
 
 /-- Membership in an orbit of `D₄FoldGroup` is decidable. -/
 instance instDecidableMemOrbitD₄FoldGroup (i i' : Fin 4) :
@@ -182,7 +182,7 @@ instance instDecidableMemOrbitD₄FoldGroup (i i' : Fin 4) :
 being mutable. -/
 @[cluster_algebras "def_fg_G2_D4"]
 noncomputable def d₄OrbitLabelling : OrbitLabelling D₄FoldGroup 4 4 2 2 :=
-  TypeBC.orbitLabellingOfReps ![0, 1] (by decide) (by decide)
+  TypeBC.orbitLabellingOfReps ![0, 1] (by decide +kernel) (by decide +kernel)
 
 /-- The orbits of the labelling `θ` of the `D₄` folding. -/
 @[cluster_algebras "def_fg_G2_D4"]
@@ -192,12 +192,12 @@ theorem d₄OrbitLabelling_orbit :
   · ext i
     rw [d₄OrbitLabelling, TypeBC.mem_orbit_orbitLabellingOfReps, mem_orbit_d₄FoldGroup_iff]
     revert i
-    decide
+    decide +kernel
 
 /-- The least element of `θ(0) = {0, 2, 3}` is `0`. -/
 private theorem typeG2_colRep_zero : d₄OrbitLabelling.colRep 0 = 0 := by
   have h : d₄OrbitLabelling.rep 0 = 0 :=
-    le_antisymm (d₄OrbitLabelling.rep_le (by rw [d₄OrbitLabelling_orbit.1]; decide))
+    le_antisymm (d₄OrbitLabelling.rep_le (by rw [d₄OrbitLabelling_orbit.1]; decide +kernel))
       (Fin.zero_le _)
   exact Fin.ext (congrArg Fin.val h)
 
@@ -222,8 +222,8 @@ private theorem typeG2_cols_one : d₄OrbitLabelling.cols le_rfl 1 = {1} := by
 /-- The increasing sequence of `{0, 2, 3}`. -/
 private theorem typeG2_increasingSeq_zero :
     increasingSeq ({0, 2, 3} : Finset (Fin 4)) = [0, 2, 3] := by
-  rw [increasingSeq, Finset.sort_insert _ (by decide) (by decide),
-    Finset.sort_insert _ (by decide) (by decide), Finset.sort_singleton]
+  rw [increasingSeq, Finset.sort_insert _ (by decide +kernel) (by decide +kernel),
+    Finset.sort_insert _ (by decide +kernel) (by decide +kernel), Finset.sort_singleton]
 
 /-- **The `D₄` lifts.** For `ε ∈ {1, -1}`, the `4 × 4` integer matrix `U_ε` with `u_{i1} = ε`
 and `u_{1i} = -ε` for `i ∈ {0, 2, 3}` and all other entries `0`. -/
@@ -240,9 +240,9 @@ skew-symmetrizing vector of `R_ε`. -/
 theorem isSkewSymmetrizingVector_matrixG₂ (ε : ℤˣ) :
     IsSkewSymmetrizingVector (matrixG₂ ε) ![1, 3] := by
   obtain rfl | rfl := Int.units_eq_one_or ε <;>
-  · refine ⟨by decide, ?_⟩
+  · refine ⟨by decide +kernel, ?_⟩
     simp only [Int.cast_id]
-    decide
+    decide +kernel
 
 /-- **The `G₂` matrices and the foldability of their lifts**, (a): `R_ε` is
 skew-symmetrizable. -/
@@ -254,7 +254,7 @@ theorem skewSymmetrizable_matrixG₂ (ε : ℤˣ) : SkewSymmetrizable (matrixG�
 @[cluster_algebras "lem_fg_G2_D4"]
 theorem cartanCounterpart_matrixG₂ (ε : ℤˣ) : cartanCounterpart (matrixG₂ ε) = cartanG₂ := by
   obtain rfl | rfl := Int.units_eq_one_or ε <;>
-  · decide
+  · decide +kernel
 
 /-- **The `G₂` matrices and the foldability of their lifts**, (a): every skew-symmetrizable
 `2 × 2` integer matrix `P` with `A(P) = C(G₂)` is `R_ε` with `ε = sgn p₁₂`. -/
@@ -299,7 +299,7 @@ theorem matrixD₄Lift_skew (ε : ℤˣ) (i j : Fin 4) :
 theorem cartanCounterpart_matrixD₄Lift (ε : ℤˣ) :
     cartanCounterpart (matrixD₄Lift ε) = cartanD 4 := by
   obtain rfl | rfl := Int.units_eq_one_or ε <;>
-  · decide
+  · decide +kernel
 
 /-- **The `G₂` matrices and the foldability of their lifts**, (b): `U_ε` is `G`-admissible. -/
 @[cluster_algebras "lem_fg_G2_D4"]
@@ -326,13 +326,13 @@ theorem matrixMutationList_matrixD₄Lift (ε : ℤˣ) (r : Fin 2) :
     matrixMutationList le_rfl (matrixD₄Lift ε) (increasingSeq (d₄OrbitLabelling.cols le_rfl r)) =
       matrixD₄Lift (-ε) := by
   fin_cases r
-  · rw [show (⟨0, by decide⟩ : Fin 2) = 0 from rfl, typeG2_cols_zero, typeG2_increasingSeq_zero]
+  · rw [show (⟨0, by decide +kernel⟩ : Fin 2) = 0 from rfl, typeG2_cols_zero, typeG2_increasingSeq_zero]
     obtain rfl | rfl := Int.units_eq_one_or ε <;>
-    · decide
-  · rw [show (⟨1, by decide⟩ : Fin 2) = 1 from rfl, typeG2_cols_one, increasingSeq,
+    · decide +kernel
+  · rw [show (⟨1, by decide +kernel⟩ : Fin 2) = 1 from rfl, typeG2_cols_one, increasingSeq,
       Finset.sort_singleton]
     obtain rfl | rfl := Int.units_eq_one_or ε <;>
-    · decide
+    · decide +kernel
 
 /-- **The `G₂` matrices and the foldability of their lifts**, (c): `U_ε` is globally foldable
 for `θ`. -/

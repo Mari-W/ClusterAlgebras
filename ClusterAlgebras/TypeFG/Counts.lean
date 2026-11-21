@@ -96,14 +96,14 @@ theorem exists_matrixMutationList_matrixF₄_eq_one (ε : Fin 3 → ℤˣ) :
     rcases Int.units_eq_one_or (ε 1) with h1 | h1 <;>
     rcases Int.units_eq_one_or (ε 2) with h2 | h2 <;>
     rw [h0, h1, h2]
-  · exact ⟨[], by decide, by decide⟩
-  · exact ⟨[3], by decide, by decide⟩
-  · exact ⟨[1, 0], by decide, by decide⟩
-  · exact ⟨[1, 0, 3], by decide, by decide⟩
-  · exact ⟨[0], by decide, by decide⟩
-  · exact ⟨[0, 3], by decide, by decide⟩
-  · exact ⟨[0, 1, 0], by decide, by decide⟩
-  · exact ⟨[0, 1, 0, 3], by decide, by decide⟩
+  · exact ⟨[], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[3], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[1, 0], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[1, 0, 3], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[0], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[0, 3], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[0, 1, 0], by decide +kernel, by decide +kernel⟩
+  · exact ⟨[0, 1, 0, 3], by decide +kernel, by decide +kernel⟩
 
 /-- **`P_{(1,1,1)}` is a reference matrix for `F₄`.** -/
 @[cluster_algebras "lem_fg_F4_reference"]
@@ -118,10 +118,10 @@ theorem isReferenceMatrix_matrixF₄_one : IsReferenceMatrix .F₄ (matrixF₄ 1
 theorem span_range_matrixF₄_one : Submodule.span ℤ (Set.range (matrixF₄ 1)) = ⊤ := by
   refine span_range_eq_top_of_single_mem fun i => ?_
   fin_cases i
-  · exact mem_span_range_of_sum_eq ![0, -1, 0, -1] (by decide)
-  · exact mem_span_range_of_sum_eq ![1, 0, 0, 0] (by decide)
-  · exact mem_span_range_of_sum_eq ![0, 0, 0, -1] (by decide)
-  · exact mem_span_range_of_sum_eq ![2, 0, 1, 0] (by decide)
+  · exact mem_span_range_of_sum_eq ![0, -1, 0, -1] (by decide +kernel)
+  · exact mem_span_range_of_sum_eq ![1, 0, 0, 0] (by decide +kernel)
+  · exact mem_span_range_of_sum_eq ![0, 0, 0, -1] (by decide +kernel)
+  · exact mem_span_range_of_sum_eq ![2, 0, 1, 0] (by decide +kernel)
 
 /-- **The `F₄` computation**, second part: there is an exchange certificate for `P_{(1,1,1)}`
 with `28` variables and `105` seeds. Checked by the kernel on the certificate data of
@@ -145,16 +145,16 @@ def matrixG₂Ext : Matrix (Fin 4) (Fin 2) ℤ :=
 
 /-- **The `G₂` computation**: the principal part of `R̃` is `R_1`. -/
 @[cluster_algebras "prop_fg_G2_computation"]
-theorem principalPart_matrixG₂Ext : principalPart (by decide) matrixG₂Ext = matrixG₂ 1 := by
-  decide
+theorem principalPart_matrixG₂Ext : principalPart (by decide +kernel) matrixG₂Ext = matrixG₂ 1 := by
+  decide +kernel
 
 /-- **The `G₂` computation**: the rows of `R̃` span `ℤ²`. -/
 @[cluster_algebras "prop_fg_G2_computation"]
 theorem span_range_matrixG₂Ext : Submodule.span ℤ (Set.range matrixG₂Ext) = ⊤ := by
   refine span_range_eq_top_of_single_mem fun i => ?_
   fin_cases i
-  · exact mem_span_range_of_sum_eq ![0, 0, 1, 0] (by decide)
-  · exact mem_span_range_of_sum_eq ![0, 0, 0, 1] (by decide)
+  · exact mem_span_range_of_sum_eq ![0, 0, 1, 0] (by decide +kernel)
+  · exact mem_span_range_of_sum_eq ![0, 0, 0, 1] (by decide +kernel)
 
 /-- **The `G₂` computation**: `R_1` is a reference matrix for `G₂`. -/
 @[cluster_algebras "prop_fg_G2_computation"]
@@ -163,7 +163,7 @@ theorem isReferenceMatrix_matrixG₂_one : IsReferenceMatrix .G₂ (matrixG₂ 1
   obtain ⟨ε, rfl, -⟩ := exists_eq_matrixG₂ hP hA
   rcases Int.units_eq_one_or ε with rfl | rfl
   · exact ⟨[], 1, by erw [relabelMatrix_self]; rfl⟩
-  · exact ⟨[(0 : Fin 2)], 1, by erw [relabelMatrix_self]; decide⟩
+  · exact ⟨[(0 : Fin 2)], 1, by erw [relabelMatrix_self]; decide +kernel⟩
 
 /-- **The `G₂` computation**: there are exchange certificates for `R_1` and for `R̃`, each with
 `8` variables and `8` seeds. Checked by the kernel on the certificate data of

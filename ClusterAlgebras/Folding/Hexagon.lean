@@ -79,8 +79,8 @@ instance : DecidableEq HexagonGroup := inferInstanceAs (DecidableEq (Multiplicat
 @[cluster_algebras "def_hexagon_action"]
 instance hexagonMulAction : MulAction HexagonGroup (Fin 6) where
   smul g i := if Multiplicative.toAdd (g : Multiplicative (ZMod 2)) = 0 then i else i + 3
-  one_smul := by decide
-  mul_smul := by decide
+  one_smul := by decide +kernel
+  mul_smul := by decide +kernel
 
 /-- The orbits of the antipodal action are the antipodal pairs `{i, i + 3}`. -/
 @[cluster_algebras "def_hexagon_action"]
@@ -88,7 +88,7 @@ theorem hexagon_mem_orbit_iff {i i' : Fin 6} :
     i' ∈ orbit HexagonGroup i ↔ i' = i ∨ i' = i + 3 := by
   rw [mem_orbit_iff]
   revert i i'
-  decide
+  decide +kernel
 
 /-- Membership in an orbit of the antipodal action is decidable. -/
 instance (i i' : Fin 6) : Decidable (i' ∈ orbit HexagonGroup i) :=
@@ -97,9 +97,9 @@ instance (i i' : Fin 6) : Decidable (i' ∈ orbit HexagonGroup i) :=
 /-- The hexagon matrix is admissible for the antipodal action. -/
 @[cluster_algebras "lem_hexagon_admissible"]
 theorem hexagon_isGroupAdmissible : IsGroupAdmissible HexagonGroup le_rfl hexagonMatrix where
-  smul_eq := by decide
-  eq_zero := by decide
-  mul_nonneg := by decide
+  smul_eq := by decide +kernel
+  eq_zero := by decide +kernel
+  mul_nonneg := by decide +kernel
 
 /-- The orbit of `i` under the antipodal action, as a finite set, is `{i, i + 3}`. -/
 theorem hexagon_filter_mem_orbit (i : Fin 6) :
@@ -123,8 +123,8 @@ theorem hexagon_not_isGroupAdmissible_matrixMutationList (i : Fin 6) :
   rw [hexagon_filter_mem_orbit] at h
   fin_cases i
   all_goals first
-    | rw [increasingSeq_pair_of_lt (by decide)] at h
-    | rw [Finset.pair_comm, increasingSeq_pair_of_lt (by decide)] at h
-  all_goals exact absurd h.mul_nonneg (by decide)
+    | rw [increasingSeq_pair_of_lt (by decide +kernel)] at h
+    | rw [Finset.pair_comm, increasingSeq_pair_of_lt (by decide +kernel)] at h
+  all_goals exact absurd h.mul_nonneg (by decide +kernel)
 
 end ClusterAlgebras

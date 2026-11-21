@@ -206,7 +206,7 @@ def pathThreeQuiver : Quiver (Fin 3) where
   arrows u v := if u = 0 ∧ v = 1 then 1 else if u = 1 ∧ v = 2 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-- The same quiver with `0` and `1` interchanged: arrows `1 → 0` and `0 → 2`. -/
 def pathThreeQuiverSwap : Quiver (Fin 3) where
@@ -214,21 +214,21 @@ def pathThreeQuiverSwap : Quiver (Fin 3) where
   arrows u v := if u = 1 ∧ v = 0 then 1 else if u = 0 ∧ v = 2 then 1 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-- `pathThreeQuiver` orients the path: one arrow across each of its two edges, none
 across the pair `{0, 2}`. -/
 theorem pathThreeQuiver_isOrientation :
     pathThreeQuiver.IsOrientation (SimpleGraph.pathGraph 3) := by
   refine ⟨rfl, ?_⟩
-  decide
+  decide +kernel
 
 /-- Transposing `0` and `1` is an isomorphism from `pathThreeQuiver` to
 `pathThreeQuiverSwap`. -/
 def pathThreeQuiverIso : pathThreeQuiver.Iso pathThreeQuiverSwap where
   equiv := Equiv.swap 0 1
-  mem_frozen_iff := by decide
-  arrows_eq := by decide
+  mem_frozen_iff := by decide +kernel
+  arrows_eq := by decide +kernel
 
 /-- **The tree in `exists_isTreeOrientation_of_mutationEquivalent` cannot be `T` itself:** on
 three vertices, a quiver mutation equivalent to an orientation of a tree `T` need not orient
@@ -249,7 +249,7 @@ theorem not_forall_isTreeOrientation :
     (SimpleGraph.isTree_pathGraph_add_one 2)
     pathThreeQuiver_isOrientation hacyclic rfl
     (Quiver.MutationEquivalent.of_iso pathThreeQuiverIso)
-  have h02 := (hbad.2 0 2 (by decide)).2 (by decide)
-  exact absurd h02.1 (by decide)
+  have h02 := (hbad.2 0 2 (by decide +kernel)).2 (by decide +kernel)
+  exact absurd h02.1 (by decide +kernel)
 
 end ClusterAlgebras

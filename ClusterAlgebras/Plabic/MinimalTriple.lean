@@ -276,7 +276,7 @@ theorem isOut_rot_pow_apply {d : H} (hd : ¬X.IsBoundaryVertex (X.vertexOf d)) (
 /-- At a triple point, `σ³` reverses the orientation. -/
 theorem isOut_rot_pow_three_apply {d : H} (hd : ¬X.IsBoundaryVertex (X.vertexOf d)) :
     X.isOut ((X.rot ^ 3) d) = !X.isOut d := by
-  rw [hX.isOut_rot_pow_apply hd, ite_eq_right (by decide)]
+  rw [hX.isOut_rot_pow_apply hd, ite_eq_right (by decide +kernel)]
 
 end IsPreTripleDiagram
 

@@ -259,7 +259,7 @@ def markovQuiver : Quiver (Fin 3) where
   arrows u v := if u = 0 ∧ v = 1 ∨ u = 1 ∧ v = 2 ∨ u = 2 ∧ v = 0 then 2 else 0
   isArrowSystem := by intro v; fin_cases v <;> decide
   twoCycleFree := by intro i j; fin_cases i <;> fin_cases j <;> decide
-  frozen_eq_zero := by decide
+  frozen_eq_zero := by decide +kernel
 
 /-! ## Words, spans and crossings
 
@@ -1647,8 +1647,8 @@ instance instFintypeE₆FoldGroup : Fintype E₆FoldGroup :=
 involution `g`. All indices are mutable (`m = n = 6`). -/
 instance instMulActionE₆FoldGroup : MulAction E₆FoldGroup (Fin 6) where
   smul g i := if Multiplicative.toAdd (g : Multiplicative (ZMod 2)) = 0 then i else e₆Involution i
-  one_smul := by decide
-  mul_smul := by decide
+  one_smul := by decide +kernel
+  mul_smul := by decide +kernel
 
 /-- Membership in an orbit of `E₆FoldGroup` is decidable. -/
 instance instDecidableMemOrbitE₆FoldGroup (i i' : Fin 6) :
@@ -1656,12 +1656,12 @@ instance instDecidableMemOrbitE₆FoldGroup (i i' : Fin 6) :
   decidable_of_iff (i' = i ∨ i' = e₆Involution i) (by
     rw [mem_orbit_iff]
     revert i i'
-    decide)
+    decide +kernel)
 
 /-- The orbit labelling `θ` of the `E₆` folding: `θ(0) = {5}`, `θ(1) = {2}`, `θ(2) = {1, 3}`,
 `θ(3) = {0, 4}`, all four orbits being mutable. -/
 noncomputable def e₆OrbitLabelling : OrbitLabelling E₆FoldGroup 6 6 4 4 :=
-  TypeBC.orbitLabellingOfReps ![5, 2, 1, 0] (by decide) (by decide)
+  TypeBC.orbitLabellingOfReps ![5, 2, 1, 0] (by decide +kernel) (by decide +kernel)
 
 /-- **The `E₆` lifts.** For `ε ∈ {1, -1}³`, the `6 × 6` integer matrix `Q_ε` with
 `q₅₂ = ε₁`, `q₂₅ = -ε₁`, `q₂₁ = q₂₃ = ε₂`, `q₁₂ = q₃₂ = -ε₂`, `q₁₀ = q₃₄ = ε₃`,

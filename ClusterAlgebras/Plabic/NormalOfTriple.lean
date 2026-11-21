@@ -1215,7 +1215,7 @@ private theorem kind_tripleDartToDart (z : TripleOfNormalDart X.InDart (2 * b)) 
       ite_eq_right (fun h => hB (X.exterior_subset_bdry h)), ite_eq_right hB, ite_eq_left ho]
     rfl
   · have hB := (mem_inDarts.1 y.2).1
-    have ho : ¬X.isOut y = true := by rw [(mem_inDarts.1 y.2).2]; decide
+    have ho : ¬X.isOut y = true := by rw [(mem_inDarts.1 y.2).2]; decide +kernel
     rw [show hX.tripleDartToDart (.minus y) = y from rfl,
       ite_eq_right (fun h => hB (X.exterior_subset_bdry h)), ite_eq_right hB, ite_eq_right ho]
     rfl

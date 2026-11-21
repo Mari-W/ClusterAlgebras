@@ -120,7 +120,7 @@ of each `P_ε`. -/
 @[cluster_algebras "lem_fg_F4_matrices"]
 theorem isSkewSymmetrizingVector_matrixF₄ (ε : Fin 3 → ℤˣ) :
     IsSkewSymmetrizingVector (matrixF₄ ε) ![2, 2, 1, 1] := by
-  refine ⟨by decide, fun i j => ?_⟩
+  refine ⟨by decide +kernel, fun i j => ?_⟩
   fin_cases i <;> fin_cases j <;> simp [matrixF₄]
 
 /-- **The matrices with Cartan counterpart `C(F₄)`**: each `P_ε` is skew-symmetrizable. -/
@@ -195,7 +195,7 @@ theorem mem_orbit_e₆FoldGroup_iff {i i' : Fin 6} :
     i' ∈ orbit E₆FoldGroup i ↔ i' = i ∨ i' = e₆Involution i := by
   rw [mem_orbit_iff]
   revert i i'
-  decide
+  decide +kernel
 
 /-- `E₆FoldGroup` has decidable equality. -/
 instance instDecidableEqE₆FoldGroup : DecidableEq E₆FoldGroup :=
@@ -227,7 +227,7 @@ theorem matrixE₆Lift_skew (ε : Fin 3 → ℤˣ) (i j : Fin 6) :
 theorem cartanCounterpart_matrixE₆Lift (ε : Fin 3 → ℤˣ) :
     cartanCounterpart (matrixE₆Lift ε) = cartanE 6 := by
   have key : ∀ a b c : ℤˣ, cartanCounterpart (matrixE₆Lift ![a, b, c]) = cartanE 6 := by
-    decide
+    decide +kernel
   exact FinVec.etaExpand_eq ε ▸ key (ε 0) (ε 1) (ε 2)
 
 /-- **The `E₆` lifts fold to the `F₄` matrices**: `Q_ε` is `G`-admissible. -/

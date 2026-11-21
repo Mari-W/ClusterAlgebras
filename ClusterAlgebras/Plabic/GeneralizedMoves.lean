@@ -294,7 +294,7 @@ private theorem isTriangulation_empty_three : IsTriangulation (∅ : Finset (Sym
     obtain ⟨hs, hside⟩ := he
     induction e using Sym2.ind with | _ u v => ?_
     have huv : u ≠ v := fun h => hs (Sym2.mk_isDiag_iff.2 h)
-    have key : ∀ x y : ZMod 3, x ≠ y → y = x + 1 ∨ x = y + 1 := by decide
+    have key : ∀ x y : ZMod 3, x ≠ y → y = x + 1 ∨ x = y + 1 := by decide +kernel
     exact hside (isSide_mk_iff.2 (key u v huv))
 
 /-- The empty datum has no pair `(s, τ)`. -/
@@ -3003,10 +3003,10 @@ private def squareIdxTerm : Equiv.Perm (Fin 4 × Fin 3) :=
     Equiv.swap (3, 0) (0, 1) * Equiv.swap (1, 1) (0, 0) * Equiv.swap (3, 1) (2, 0)
 
 private theorem squareIdxInit_parity :
-    ∀ p : Fin 4 × Fin 3, ((squareIdxInit p).1 : ℕ) % 2 ≠ (p.1 : ℕ) % 2 := by decide
+    ∀ p : Fin 4 × Fin 3, ((squareIdxInit p).1 : ℕ) % 2 ≠ (p.1 : ℕ) % 2 := by decide +kernel
 
 private theorem squareIdxTerm_parity :
-    ∀ p : Fin 4 × Fin 3, ((squareIdxTerm p).1 : ℕ) % 2 ≠ (p.1 : ℕ) % 2 := by decide
+    ∀ p : Fin 4 × Fin 3, ((squareIdxTerm p).1 : ℕ) % 2 ≠ (p.1 : ℕ) % 2 := by decide +kernel
 
 private theorem squareDart_mem (G : PlabicData H b) (c : H) (p : Fin 4 × Fin 3) :
     G.squareDart c p ∈ G.vertexOf (G.squareCorner c p.1) :=
@@ -3140,7 +3140,7 @@ private theorem colour_squareCorner_of_white (hc : G.colour c = .white) (k : Fin
   obtain ⟨c0, c1, c2, c3, d0, d1, d2, d3⟩ := hq.colours_of_white hc
   obtain rfl | rfl | rfl | rfl : k = 0 ∨ k = 1 ∨ k = 2 ∨ k = 3 := by
     revert k
-    decide
+    decide +kernel
   all_goals simp [-squareCorner_zero, c0, c1, c2, c3, d0, d1, d2, d3]
 
 private theorem isInitial_squareDart_iff (hc : G.colour c = .white) (p : Fin 4 × Fin 3) :
@@ -3436,19 +3436,19 @@ private theorem squareTerm_chainEnd (hc : G.colour c = .white) {d : H}
   have tv := hq.squareTerm_inv_squareDart
   have hρ0 : hq.squareTerm (G.inv (G.squareCorner c 3)) = G.inv (G.rot (G.squareCorner c 0)) := by
     have := tv (3, 0)
-    rwa [squareDart_zero, show squareIdxTerm (3, 0) = (0, 1) by decide,
+    rwa [squareDart_zero, show squareIdxTerm (3, 0) = (0, 1) by decide +kernel,
       squareDart_one] at this
   have hρ1 : hq.squareTerm (G.inv (G.rot (G.squareCorner c 1))) = G.inv (G.squareCorner c 0) := by
     have := tv (1, 1)
-    rwa [squareDart_one, show squareIdxTerm (1, 1) = (0, 0) by decide,
+    rwa [squareDart_one, show squareIdxTerm (1, 1) = (0, 0) by decide +kernel,
       squareDart_zero] at this
   have hρ2 : hq.squareTerm (G.inv (G.squareCorner c 1)) = G.inv (G.rot (G.squareCorner c 2)) := by
     have := tv (1, 0)
-    rwa [squareDart_zero, show squareIdxTerm (1, 0) = (2, 1) by decide,
+    rwa [squareDart_zero, show squareIdxTerm (1, 0) = (2, 1) by decide +kernel,
       squareDart_one] at this
   have hρ3 : hq.squareTerm (G.inv (G.rot (G.squareCorner c 3))) = G.inv (G.squareCorner c 2) := by
     have := tv (3, 1)
-    rwa [squareDart_one, show squareIdxTerm (3, 1) = (2, 0) by decide,
+    rwa [squareDart_one, show squareIdxTerm (3, 1) = (2, 0) by decide +kernel,
       squareDart_zero] at this
   have chain : ∀ {a : H}, a ∉ G.squareEdgeDarts c →
       hq.squareTerm ((G.squareMove c).chainEnd a) = G.chainEnd a := fun ha =>
@@ -3517,34 +3517,34 @@ private theorem squareTerm_chainEnd (hc : G.colour c = .white) {d : H}
     have hex := hd.exists_isTerminal hG₁
     rw [hq.squareInit_squareDart]
     rcases hk' with rfl | rfl <;> rcases hi with rfl | rfl | rfl
-    · rw [show squareIdxInit (1, 0) = (2, 0) by decide, squareDart_zero, squareDart_zero,
+    · rw [show squareIdxInit (1, 0) = (2, 0) by decide +kernel, squareDart_zero, squareDart_zero,
         chainEnd_eq_tripMap (G := G.squareMove c) nC₁1 (by rw [T₁C1]; exact tC₁2), T₁C1,
         chainEnd_eq_tripMap (G := G) nC2 (by rw [TC2]; exact tC3), TC2]
       have := tv (3, 2)
       rwa [hq.squareDart_two' (j := 3) (k := 2) rfl, hinv,
-        show squareIdxTerm (3, 2) = (0, 2) by decide, hq.squareDart_two' (j := 0) (k := 3) rfl,
+        show squareIdxTerm (3, 2) = (0, 2) by decide +kernel, hq.squareDart_two' (j := 0) (k := 3) rfl,
         hinv] at this
-    · rw [squareDart_one, show squareIdxInit (1, 1) = (2, 2) by decide,
+    · rw [squareDart_one, show squareIdxInit (1, 1) = (2, 2) by decide +kernel,
         hq.squareDart_two' (j := 2) (k := 1) rfl,
         ← chainEnd_tripMap (G := G) nI1 (iI1.exists_isTerminal hG), TI1]
       exact chain (hq.rot_squareCorner_notMem 1)
     · rw [hq.squareDart_two' (j := 1) (k := 0) rfl] at hex ⊢
-      rw [show squareIdxInit (1, 2) = (0, 1) by decide, squareDart_one,
+      rw [show squareIdxInit (1, 2) = (0, 1) by decide +kernel, squareDart_one,
         ← chainEnd_tripMap (G := G.squareMove c) nI₁0 hex, T₁I0]
       exact chain (hq.rot_squareCorner_notMem 0)
-    · rw [show squareIdxInit (3, 0) = (0, 0) by decide, squareDart_zero, squareDart_zero,
+    · rw [show squareIdxInit (3, 0) = (0, 0) by decide +kernel, squareDart_zero, squareDart_zero,
         chainEnd_eq_tripMap (G := G.squareMove c) nC₁3 (by rw [T₁C3]; exact tC₁0), T₁C3,
         chainEnd_eq_tripMap (G := G) nC0 (by rw [TC0]; exact tC1), TC0]
       have := tv (1, 2)
       rwa [hq.squareDart_two' (j := 1) (k := 0) rfl, hinv,
-        show squareIdxTerm (1, 2) = (2, 2) by decide, hq.squareDart_two' (j := 2) (k := 1) rfl,
+        show squareIdxTerm (1, 2) = (2, 2) by decide +kernel, hq.squareDart_two' (j := 2) (k := 1) rfl,
         hinv] at this
-    · rw [squareDart_one, show squareIdxInit (3, 1) = (0, 2) by decide,
+    · rw [squareDart_one, show squareIdxInit (3, 1) = (0, 2) by decide +kernel,
         hq.squareDart_two' (j := 0) (k := 3) rfl,
         ← chainEnd_tripMap (G := G) nI3 (iI3.exists_isTerminal hG), TI3]
       exact chain (hq.rot_squareCorner_notMem 3)
     · rw [hq.squareDart_two' (j := 3) (k := 2) rfl] at hex ⊢
-      rw [show squareIdxInit (3, 2) = (2, 1) by decide, squareDart_one,
+      rw [show squareIdxInit (3, 2) = (2, 1) by decide +kernel, squareDart_one,
         ← chainEnd_tripMap (G := G.squareMove c) nI₁2 hex, T₁I2]
       exact chain (hq.rot_squareCorner_notMem 2)
   · rw [hq.squareInit_of_notMem hdv]
@@ -3692,7 +3692,7 @@ theorem IsGeneralizedTripleDiagram.exists_squareMove (hG : G.IsPlabicGraph) {c :
     rw [vd₁, vd₂]
     intro e
     exact absurd (hq.injective ((bijOn_strandTriplePoint hG hD).injOn (htri 0 rfl).1
-      (htri 2 rfl).1 e)) (by decide)
+      (htri 2 rfl).1 e)) (by decide +kernel)
   obtain ⟨hface, hdig⟩ := isDigon_of_facePerm f₁ f₂
     (by rw [mem_strandDiagram_bdry]; exact id) (by rw [mem_strandDiagram_bdry]; exact id) hv
   have hd : X₀.IsDigon (X₀.faceOf d₁) := hface ▸ hdig

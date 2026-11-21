@@ -74,7 +74,7 @@ open Finset _root_.Equiv _root_.Equiv.Perm
 
 /-- Every element of `Fin 4` is one of `0, 1, 2, 3`. -/
 private theorem fin_cases_four (k : Fin 4) : k = 0 ∨ k = 1 ∨ k = 2 ∨ k = 3 := by
-  revert k; decide
+  revert k; decide +kernel
 
 /-! ### A loop around an empty face -/
 

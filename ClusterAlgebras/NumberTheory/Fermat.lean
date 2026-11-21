@@ -261,13 +261,13 @@ def fermatMatrix : Matrix (Fin 3) (Fin 2) ℤ :=
 
 /-- The Fermat matrix is extended skew-symmetrizable: its principal part has the
 skew-symmetrizing vector `d = (1, 4)`. -/
-theorem extSkewSymmetrizable_fermatMatrix : ExtSkewSymmetrizable (by decide) fermatMatrix :=
-  ⟨![1, 4], by decide, by decide⟩
+theorem extSkewSymmetrizable_fermatMatrix : ExtSkewSymmetrizable (by decide +kernel) fermatMatrix :=
+  ⟨![1, 4], by decide +kernel, by decide +kernel⟩
 
 /-- The **Fermat seed** `Σ = (X̃, B̃_F)`, formed by the indeterminates of `ℚ(X₁, X₂, X₃)` and the
 Fermat matrix, is a labeled seed over `ℚ`. -/
 theorem isLabeledSeed_genericSeed_fermatMatrix :
-    IsLabeledSeed ℚ (by decide) (genericSeed fermatMatrix) :=
+    IsLabeledSeed ℚ (by decide +kernel) (genericSeed fermatMatrix) :=
   isLabeledSeed_genericSeed _ extSkewSymmetrizable_fermatMatrix
 
 /-- The values under `φ` of the extended cluster `(x'₁, X₂, X₃)` of `μ₁(Σ)`, where
@@ -311,12 +311,12 @@ theorem fermat_map_seedMutationSeq_singleton
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [] 0 (i := 1) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [] 0 (i := 1) (by decide +kernel)
   have n₂ := hS.map_seedMutationSeq_concat_of_ne
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [] 0 (i := 2) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [] 0 (i := 2) (by decide +kernel)
   simp only [List.nil_append, hv] at n₁ n₂
   rw [hv]
   fin_cases j
@@ -361,19 +361,19 @@ theorem fermat_map_seedMutationSeq_eq
   have a₀ : v [0] 0 = 5 := hval 0
   have a₁ : v [0] 1 = -1 := hval 1
   have a₂ : v [0] 2 = 16 := hval 2
-  have hB₁ : (seedMutationSeq (by decide) (genericSeed fermatMatrix) [0]).extExchangeMatrix =
+  have hB₁ : (seedMutationSeq (by decide +kernel) (genericSeed fermatMatrix) [0]).extExchangeMatrix =
       !![0, -4; 1, 0; -1, 1] := by
     change matrixMutation _ fermatMatrix 0 = _
-    decide
-  have hB₂ : (seedMutationSeq (by decide) (genericSeed fermatMatrix) [0, 1]).extExchangeMatrix =
+    decide +kernel
+  have hB₂ : (seedMutationSeq (by decide +kernel) (genericSeed fermatMatrix) [0, 1]).extExchangeMatrix =
       !![0, 4; -1, 0; 0, -1] := by
     change matrixMutation _ (matrixMutation _ fermatMatrix 0) 1 = _
-    decide
+    decide +kernel
   have hB₃ :
-      (seedMutationSeq (by decide) (genericSeed fermatMatrix) [0, 1, 0]).extExchangeMatrix =
+      (seedMutationSeq (by decide +kernel) (genericSeed fermatMatrix) [0, 1, 0]).extExchangeMatrix =
         !![0, -4; 1, 0; 0, -1] := by
     change matrixMutation _ (matrixMutation _ (matrixMutation _ fermatMatrix 0) 1) 0 = _
-    decide
+    decide +kernel
   have e₂ := hS.map_seedMutationSeq_concat_mul
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
@@ -383,7 +383,7 @@ theorem fermat_map_seedMutationSeq_eq
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0] 1 (i := 0) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0] 1 (i := 0) (by decide +kernel)
   simp only [List.cons_append, List.nil_append] at e₂ n₂₀
   simp only [hv] at e₂ n₂₀
   rw [hB₁] at e₂
@@ -399,17 +399,17 @@ theorem fermat_map_seedMutationSeq_eq
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0, 1] 0 (i := 1) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0, 1] 0 (i := 1) (by decide +kernel)
   have n₃₂ := hS.map_seedMutationSeq_concat_of_ne
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0, 1] 0 (i := 2) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0, 1] 0 (i := 2) (by decide +kernel)
   have n₂₂ := hS.map_seedMutationSeq_concat_of_ne
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
-      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0] 1 (i := 2) (by decide)
+      (hMatrixMutationNeg := hMatrixMutationNeg) _ φ [0] 1 (i := 2) (by decide +kernel)
   simp only [List.cons_append, List.nil_append] at e₃ n₃₁ n₃₂ n₂₂
   simp only [hv] at e₃ n₃₁ n₃₂ n₂₂
   rw [hB₂] at e₃
@@ -475,8 +475,8 @@ theorem fermat_map_seedMutationSeq_eq_intCast
       (hMatrixMutationMatrixMutation := hMatrixMutationMatrixMutation)
       (hMatrixMutationNeg := hMatrixMutationNeg) _ s i) hzL
   rw [h₀] at ha
-  set S' := seedMutation (by decide) (genericSeed fermatMatrix) 0
-  have hS' : IsLabeledSeed ℚ (by decide) S' := hS.seedMutation
+  set S' := seedMutation (by decide +kernel) (genericSeed fermatMatrix) 0
+  have hS' : IsLabeledSeed ℚ (by decide +kernel) S' := hS.seedMutation
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation) _ 0
   have hval := fermat_map_seedMutationSeq_singleton
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
@@ -491,7 +491,7 @@ theorem fermat_map_seedMutationSeq_eq_intCast
         (hMatrixMutationNeg := hMatrixMutationNeg) _ [0] j
   have hS'1 : S'.extCluster 1 = (genericSeed fermatMatrix).extCluster 1 := by
     simp only [S', ClusterAlgebras.seedMutation]
-    exact Function.update_of_ne (by decide) _ _
+    exact Function.update_of_ne (by decide +kernel) _ _
   have hz' := hS'.seedMutationSeq_extCluster_mem_mixedLaurentSubring
       (hSubmatrixMatrixMutation := hSubmatrixMatrixMutation)
       (hMatrixMutationComm := hMatrixMutationComm)

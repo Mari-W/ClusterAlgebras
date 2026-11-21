@@ -200,7 +200,7 @@ theorem decoratedTripPerm_bridgeDecomposition (hs : IsBridgeSequence b π.affini
     cases hc : π.colour ⟨x, h2⟩
     · exact (PlabicData.tripDecoration_eq_white_iff _).2 (key.2 hc)
     · rw [hc] at key
-      exact (PlabicData.tripDecoration_eq_black_iff _).2 fun hw => absurd (key.1 hw) (by decide)
+      exact (PlabicData.tripDecoration_eq_black_iff _).2 fun hw => absurd (key.1 hw) (by decide +kernel)
 
 end DecoratedPerm
 

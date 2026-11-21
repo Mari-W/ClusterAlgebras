@@ -662,11 +662,11 @@ private theorem notMem_of_mem_outsideList (hh : X.IsMonogonWindingFunction P h) 
   cases ζ
   · simp only [outsideList, List.mem_append, mem_cornerList] at hd
     rcases hd with hd | ⟨q, hq, hd⟩
-    · exact hside .left (by decide) hd
+    · exact hside .left (by decide +kernel) hd
     · exact hcorner q hq 1 (Or.inl ⟨rfl, rfl⟩) hd
   · simp only [outsideList, List.mem_append, mem_cornerList] at hd
     rcases hd with hd | ⟨q, hq, hd⟩
-    · exact hside .right (by decide) hd
+    · exact hside .right (by decide +kernel) hd
     · exact hcorner q hq 0 (Or.inr ⟨rfl, rfl⟩) hd
 
 omit hX in

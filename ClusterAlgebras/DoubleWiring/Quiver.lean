@@ -127,10 +127,10 @@ theorem twoCycleFree_wiringArrows : TwoCycleFree D.wiringArrows := by
           rcases hi' with ⟨hr', -, hcol'⟩ | ⟨hl', -, hcol'⟩
         · omega
         · refine absurd (hcol.symm.trans (?_ : c.rightEndColour = c'.leftEndColour)
-            |>.trans hcol') (by decide)
+            |>.trans hcol') (by decide +kernel)
           rw [rightEndColour, leftEndColour, hl']
         · refine absurd (hcol.symm.trans (?_ : c.leftEndColour = c'.rightEndColour)
-            |>.trans hcol') (by decide)
+            |>.trans hcol') (by decide +kernel)
           rw [leftEndColour, rightEndColour, hl]
         · omega
       · rw [hg] at hadj'; omega
@@ -141,20 +141,20 @@ theorem twoCycleFree_wiringArrows : TwoCycleFree D.wiringArrows := by
           rcases hrest' with ⟨k1, k2, -, kcol, -⟩ | ⟨k1, k2, -, kcol, -⟩ |
             ⟨k1, k2, k3, kcol, -⟩ | ⟨k1, k2, k3, -, kcol⟩
         · exact not_span_eq_of_gap_adjacent hadj (by omega) (by omega)
-        · exact absurd (hcol.symm.trans kcol) (by decide)
+        · exact absurd (hcol.symm.trans kcol) (by decide +kernel)
         · omega
         · omega
-        · exact absurd (hcol.symm.trans kcol) (by decide)
+        · exact absurd (hcol.symm.trans kcol) (by decide +kernel)
         · exact not_span_eq_of_gap_adjacent hadj (by omega) (by omega)
         · omega
         · omega
         · omega
         · omega
         · omega
-        · exact absurd (hcol.symm.trans kcol) (by decide)
+        · exact absurd (hcol.symm.trans kcol) (by decide +kernel)
         · omega
         · omega
-        · exact absurd (hcol.symm.trans kcol) (by decide)
+        · exact absurd (hcol.symm.trans kcol) (by decide +kernel)
         · omega
   · left
     rw [wiringArrows, ite_eq_right h]

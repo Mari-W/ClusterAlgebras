@@ -337,17 +337,17 @@ theorem loopCutInside_rot_inl (c : {x // x ∈ C}) :
 /-- The rotation of the inside sends `g = Sum.inr 0` to `p̄ = Sum.inr 2`. -/
 theorem loopCutInside_rot_inr_zero : (loopCutInside h).rot (.inr 0) = .inr 2 := by
   simp only [loopCutInside, Perm.sumCongr_apply, Sum.map_inr]
-  exact congrArg Sum.inr (by decide)
+  exact congrArg Sum.inr (by decide +kernel)
 
 /-- The rotation of the inside sends `p = Sum.inr 1` to `g = Sum.inr 0`. -/
 theorem loopCutInside_rot_inr_one : (loopCutInside h).rot (.inr 1) = .inr 0 := by
   simp only [loopCutInside, Perm.sumCongr_apply, Sum.map_inr]
-  exact congrArg Sum.inr (by decide)
+  exact congrArg Sum.inr (by decide +kernel)
 
 /-- The rotation of the inside sends `p̄ = Sum.inr 2` to `p = Sum.inr 1`. -/
 theorem loopCutInside_rot_inr_two : (loopCutInside h).rot (.inr 2) = .inr 1 := by
   simp only [loopCutInside, Perm.sumCongr_apply, Sum.map_inr]
-  exact congrArg Sum.inr (by decide)
+  exact congrArg Sum.inr (by decide +kernel)
 
 /-- The inverse rotation of the inside sends its leg to `p = Sum.inr 1`. -/
 theorem loopCutInside_rot_symm_leg :

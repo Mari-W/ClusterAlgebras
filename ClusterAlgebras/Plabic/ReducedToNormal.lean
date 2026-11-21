@@ -505,7 +505,7 @@ private theorem inr_mem_leafGluingDarts_lollipopGraph_iff (r : LollipopDart) :
     Sum.inr r ∈ leafGluingDarts f (lollipopGraph .black)
       ((lollipopGraph .black).rot.symm ((lollipopGraph .black).leg 0))
       ((lollipopGraph .black).leg 0) ↔ r = .gBar := by
-  have hp : (lollipopGraph .black).rot.symm ((lollipopGraph .black).leg 0) = .e := by decide
+  have hp : (lollipopGraph .black).rot.symm ((lollipopGraph .black).leg 0) = .e := by decide +kernel
   simp only [leafGluingDarts, Set.mem_compl_iff, Set.mem_insert_iff, Set.mem_singleton_iff,
     reduceCtorEq, Sum.inr.injEq, false_or, not_or, hp]
   cases r <;> decide
@@ -581,7 +581,7 @@ private theorem isomorphic_leafGluing_lollipopGraph (hY : Y.IsPlabicGraph) (hf :
     Y.Isomorphic (Y.leafGluing
       (isLeafGluingSite_of_isPlabicGraph hY (isPlabicGraph_lollipopGraph .black) hf hff)) := by
   have h := isLeafGluingSite_of_isPlabicGraph hY (isPlabicGraph_lollipopGraph .black) hf hff
-  have hrg : (lollipopGraph .black).rot .gBar = .gBar := by decide
+  have hrg : (lollipopGraph .black).rot .gBar = .gBar := by decide +kernel
   have hθf := coe_leafGluingLollipopEquiv_self (f := f)
   refine ⟨⟨leafGluingLollipopEquiv f, fun d => ?_, fun d => ?_, fun d => ?_, fun d _ => ?_,
     fun i => ?_⟩⟩

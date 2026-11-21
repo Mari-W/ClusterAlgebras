@@ -126,7 +126,7 @@ private theorem RootedTree.exists_nonRoot_eq_image (T : (A.lollipopInsertion i c
           rw [h, hs] at h2
           simp at h2
         · exact ((DiskMap.mem_internalVertices _).1 (T.nonRoot_subset h)).2
-            (isBoundaryVertex_lollipopInsertion_vertexOf_inr_of_ne (k := 2) c (by decide))
+            (isBoundaryVertex_lollipopInsertion_vertexOf_inr_of_ne (k := 2) c (by decide +kernel))
       · exact ((DiskMap.mem_internalVertices _).1 (T.nonRoot_subset hw)).2
           (hz ▸ isBoundaryVertex_lollipopInsertion_vertexOf_inr_of_ne c hk)
   refine ⟨A.vertices.filter fun t => t.map Function.Embedding.inl ∈ T.nonRoot, ?_⟩
